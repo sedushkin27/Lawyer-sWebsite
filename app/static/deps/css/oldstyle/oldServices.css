@@ -1,0 +1,263 @@
+/* section services */
+
+.section-services {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.container-services {
+    flex-direction: column;
+}
+
+/* Old CSS */
+
+/* 
+.services {
+    display: flex;
+    width: 100%;
+}
+
+.image-service-and-list-sercices{
+    display: flex;
+    flex-direction: column;
+    max-width: 370px;
+    width: 100%;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.image-service {
+    width: 100%;
+}
+
+.list-services {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.service {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 4px 4px 22px 0 rgba(0, 0, 0, 0.25);
+    background: #2c2c2c;
+    width: 100%;
+    padding: 15px 0;
+
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.service a {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.title-count-text-about-service {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 751px;
+    padding: 10px;
+}
+
+.title-and-count {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px;
+    width: 100%;
+}
+
+.title-service {
+    font-family: "Playfair Display", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    text-transform: uppercase;
+}
+
+.count-service {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+}
+
+.text-service {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.07em;
+}
+
+.container-buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+/* New CSS */
+
+.services {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.service {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    transition: all 1s ease;
+    box-shadow: 4px 4px 22px 0 rgba(0, 0, 0, 0.25);
+    background: #2c2c2c;
+    overflow: hidden;
+}
+
+.main-title-service {
+    width: 100%;
+    text-align: center;
+    margin: 15px;
+}
+
+.container-service {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+
+    opacity: 1;
+    max-height: 1000px;
+    transition: opacity 2s ease, max-height 2s ease;
+}
+
+.container-service.hidden {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 3s ease, max-height 2s ease;
+}
+
+.image-service {
+    width: 360px;
+    height: 360px;
+    object-fit: cover; 
+    object-position: center; 
+    display: block; 
+}
+
+.text-and-buttons-service {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px 15px;
+    gap: 15px;
+}
+
+.container-title-and-count {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.title-service {
+    font-family: "Playfair Display", sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    text-transform: uppercase;
+}
+
+.count-service {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+}
+
+.text-service {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.07em;
+}
+
+.container-buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button-service {
+    opacity: 1;
+    transition: opacity 2s ease;
+}
+
+.button-service.hidden {
+    opacity: 0;
+    display: none;
+}
+
+/* Медиа-запросы */ 
+
+@media screen and (max-width: 1306px) {
+    .container-title-and-count {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .container-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .container-service {
+        flex-direction: column;
+    }
+
+    .image-service {
+        width: 100%;
+    }
+
+    .text-and-buttons-service {
+        width: auto;
+    }
+
+    .main-title-service {
+        font-size: 25px;
+        width: auto;
+    }
+
+    .container-buttons {
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .button-services {
+        width: 100%;
+        padding: 15px 0;
+    }
+}

@@ -1,0 +1,229 @@
+/* section consultation */
+
+.section-consultation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.container-consultation {
+    gap: 32px;
+}
+
+.list-consultation {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 356px;
+    width: 100%;
+}
+
+.consultation{
+    max-width: 355px;
+    max-height: 434px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 4px 4px 22px 0 rgba(0, 0, 0, 0.25);
+    transition: all 1s ease;
+}
+
+.consultation a {
+    width: 100%;
+    height: 100%;
+}
+
+.consultation-image{
+    width: 100%;
+}
+
+.consultation-container-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 35px 31px;
+    background: #2c2c2c;
+}
+
+.consultation-container-title h1 {
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.information-consultation {
+    padding: 10px 0px;
+    max-width: 743px;
+    width: 100%;
+}
+
+.container-image-title-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-height: 244px;
+}
+
+.container-image-title-buttons img{
+    width: auto;
+    height: 100%;
+    max-width: 244px;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center; 
+    display: block;
+}
+
+.container-title-and-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container-title-and-buttons h1 {
+    font-family: "Playfair Display", sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+}
+
+.container-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.information-consultation h2 {
+    font-family: "Playfair Display", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.about-consultation {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+.about-consultation p {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.04em;
+    text-align: justify;
+}
+
+.that-you-get {
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Расстояние между заголовком и списком */
+}
+
+.that-you-get h2 {
+    font-family: "Playfair Display", sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.list-that-you-get {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+/* Убираем лишние стили */
+.element-list-that-you-get {
+    max-width: 335px; 
+    box-shadow: 4px 4px 22px 0 rgba(0, 0, 0, 0.25);
+    background: #2c2c2c;
+    padding: 10px;
+    border-radius: 15px;
+    position: relative;
+}
+
+/* .element-list-that-you-get:last-child,
+.element-list-that-you-get:nth-last-child(2):nth-child(odd) {
+    margin-bottom: 0;
+} */
+
+.list-title {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.list-in-list-that-you-get {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.list-in-list-that-you-get li {
+    padding-left: 20px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+}
+
+.list-in-list-that-you-get li::before {
+    content: "•";
+    position: absolute;
+    left: 10px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+}
+
+/* Адаптивность */
+@media screen and (max-width: 1000px) {
+    .container-consultation {
+        flex-direction: column-reverse;
+        padding: 10px;
+    }
+
+    .information-consultation {
+        max-width: none;
+    }
+
+    .list-that-you-get {
+        grid-template-columns: auto;
+        gap: 20px;
+    }
+
+    .element-list-that-you-get {
+        max-width: none;
+    }
+
+    .list-consultation {
+        max-width: none;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .container-image-title-buttons {
+        flex-direction: column;
+        max-height: none;
+    }
+
+    .container-image-title-buttons img {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        max-width: none;
+    }
+
+}

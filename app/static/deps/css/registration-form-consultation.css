@@ -1,0 +1,230 @@
+.registration {
+    display: flex;
+    height: 100cqh;
+}
+
+.container-about-service-or-consultation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 100px 20px 0 20px;
+    width: 50%;
+    background-image: url(../image/background_registration_form.png);
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center; 
+}
+
+.go-back {
+    font-weight: 500;
+    font-size: 20px;
+    text-transform: uppercase;
+
+    border: 2px solid #2329a4;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.title-service-or-consultation {
+    font-weight: 400;
+    font-size: 32px;
+}
+
+.price-service-or-consultation {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.about-service-or-consultatio {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0.07em;
+}
+
+.container-registration-form {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px 0 20px;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.container-calendar,
+.container-input-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.container-calendar h2,
+.container-input-info h2 {
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* container calendar */
+.container-calendar.hidden {
+    display: none;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.nav-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.days-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 10px;
+    gap: 20px;
+}
+
+.days-of-week span {
+    font-size: 16px;
+    color: #fff;
+}
+
+.days-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: default;
+}
+
+.day.empty {
+    background: transparent;
+}
+
+.day.unavailable {
+    background: #4C4C4C;
+    color: #fff;
+}
+
+.day.available {
+    background: #242AA9;
+    color: #fff;
+    cursor: pointer;
+}
+
+.day.available:hover {
+    opacity: 0.8;
+}
+
+.day.selected {
+    background: #307E35;
+    color: #fff;
+}
+
+.dividing-line {
+    width: 100%;
+    height: 1px;
+}
+
+.time-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.time-button {
+    padding: 10px 20px;
+    background: #242AA9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.time-button:hover {
+    opacity: 0.8;
+}
+
+.time-button.selected {
+    background: #307E35;
+}
+
+/* container info */
+.container-input-info.hidden {
+    display: none;
+}
+
+.table-input {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+    column-gap: 50px;
+    width: 100%;
+}
+
+.container-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.input-in-form-registration {
+    padding: 15px 10px;
+    font-size: 20px;
+    border-bottom: 2px solid #fff;
+    border-radius: 5px;
+}
+
+.comment {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 3;
+}
+
+.button-submit {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 4;
+
+    font-size: 20px;
+
+    border-radius: 5px;
+    padding: 15px 15px;
+    background: #272eb7;
+}

@@ -1,0 +1,106 @@
+/* section about me */
+.section-about-me {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.image-about-me {
+    max-width: 380px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 22px 0 rgba(0, 0, 0, 0.25);
+}
+
+.container-text-about-me {
+    display: flex;
+    flex-direction: column;
+    max-width: 761px;
+    gap: 10px;
+}
+
+.container-text-about-me h1 {
+    font-family: "Playfair Display", sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+}
+
+.container-text-about-me h2 {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.container-text-about-me h3 {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.container-text-about-me p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.4375;
+    letter-spacing: 0.04em;
+}
+
+/* Section advantages */
+.advantages {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 15px;
+    gap: 30px;
+    background-image: url(../image/background_advantages.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.advantage {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    max-height: 352px;
+    border-radius: 12px;
+    padding: 35px 31px;
+    box-shadow: 4px 4px 22px 0 rgba(0, 0, 0, 0.25);
+    background: #2c2c2c;
+}
+
+.title-advantage {
+    font-weight: 600;
+    font-size: 22px;
+    text-align: center;
+}
+
+.text-advantage {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* Медиа-запросы */
+
+@media screen and (max-width: 1200px) {
+    .container-advantages {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container-about-me {
+        flex-direction: column;
+    }
+
+    .image-about-me {
+        max-width: none;
+    }
+
+    .container-text-about-me {
+        padding: 10px;
+    }
+}
