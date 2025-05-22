@@ -1,97 +1,160 @@
+{% extends "main/base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ua">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Адвокат Ольга Бардадим</title>
-    <link rel="icon" type="image/x-icon" href="{% static "deps/icon/icon.ico" %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static "deps/css/everywhere.css" %}">
+{% block css %}
     <link rel="stylesheet" href="{% static "deps/css/main.css" %}">
-</head>
-<body data-barba="wrapper">
-    <div class="transition-overlay">
-        <div class="transition-logo"></div>
-    </div>
-    <div class="container-form-call-us">
-        <form action="" method="post" class="form-call-us">
-            <h2>Введіть номер телефону.</h2>
-            <p>Для того щоб ми зв’язалисся з вами введіть свій номер телефону в поле:</p>
-            <div class="container-input-tel">
-                <div class="tel-code">
-                    <img src="{% static "deps/svg/flag_ua.svg" %}" alt="Відправити">
-                    <p>+380</p>
-                </div>
-                <input type="tel" name="users-tel" id="users-tel" placeholder="XX-XXX-XX-XX" maxlength="12">
-                <button id="enter-tel" name="enter-tel" type="submit" class="buttton-enter-tel"><svg width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5V10.5ZM35.0607 13.0607C35.6464 12.4749 35.6464 11.5251 35.0607 10.9393L25.5147 1.3934C24.9289 0.807612 23.9792 0.807612 23.3934 1.3934C22.8076 1.97918 22.8076 2.92893 23.3934 3.51472L31.8787 12L23.3934 20.4853C22.8076 21.0711 22.8076 22.0208 23.3934 22.6066C23.9792 23.1924 24.9289 23.1924 25.5147 22.6066L35.0607 13.0607ZM2 13.5H34V10.5H2V13.5Z" fill="white" /></svg></button>
-            </div>
-            <p class="error-message">Будь ласка, введіть коректний номер телефону (9 цифр після +380).</p>
-            <a href="conditioning_policy.html">Політика кондифіциальності</a>
-        </form>
-    </div>
-    <header>
-        <a href="/main.html" class="container-logo">
-            <h1 class="logo">Ольга Бардадим</h1>
-            <div>
-                <span><hr></span>
-                <h3>Адвокат</h3>
-                <span><hr></span>
-            </div>
-        </a>
-        <nav>
-            <div class="menu-hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="drop-menu">
-                <ul>
-                    <li><a href="/main.html" class="link">Головна сторінка</a></li>
-                    <li><a href="/services.html" class="link">Наші послуги</a></li>
-                    <li><a href="/about_me.html" class="link">Про мене</a></li>
-                    <li><button id="call_us" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button></li>
-                    <li><a href="/consultation.html" id="sing_up_for_consultation" class="button button-sing-up-for-consultation" title="Записатися на консультацію">Обрати консультацію</a></li>
-                </ul> 
-            </div>
-        </nav>
-    </header>
-    <main>
-    </main>
-    <footer>
-        <div class="container-global container-footer">
-            <ul class="list-links-in-footer">
-                <li><a href="/main.html">Головна</a></li>
-                <li><a href="/services.html">Мої послуги</a></li>
-                <li><a href="/about_me.html">Про мене</a></li>
-                <li><a href="#">Зв'язатися зі мною</a></li>
-                <li><a href="/consultation.html">Отримати консультацію</a></li>
-                <li><a href="/conditioning_policy.html">Політика кондифіціальності</a></li>
-                <li><a href="#">Публічна офорта</a></li>
-            </ul>
-            <div class="container-logo">
-                <h1 class="logo">Ольга Бардадим</h1>
-                <div>
-                    <span><hr></span>
-                    <h3>Адвокат</h3>
-                    <span><hr></span>
-                </div>
-                <p>@OlgaBardadym</p>
-            </div>
-            <ul class="list-meta-platforms">
-                <li><a href="#"><img src="{% static "deps/svg/facebook.svg" %}" alt=""></a></li>
-                <li><a href="#"><img src="{% static "deps/svg/instagram.svg" %}" alt=""></a></li>
-                <li><a href="#"><img src="{% static "deps/svg/tiktok.svg" %}" alt=""></a></li>
-                <li><a href="#"><img src="{% static "deps/svg/telegram.svg" %}" alt=""></a></li>
-            </ul>
+{% endblock css %}
+
+{% block content %}
+    <section class="home">
+        <div class="home-container">
+            <h1>Професійна юридична допомога у складних та індивідуальних справах.</h1>
+            <h2>Ми забезпечимо надійний правовий захист і знайдемо найкраще рішення для вас.</h2>
+            <a href="/consultation.html" class="button button-sing-up-for-consultation button-link" title="Обрати консультацію">Обрати консультацію</a>
+            <p>Отримаєте кваліфіковану допомогу вже сьогодні!</p>
         </div>
-    </footer>
-    <script src="https://unpkg.com/@barba/core"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-    <script src="{% static "deps/js/everywhere.js" %}"></script>
+    </section>
+    <section class="section-about-me">
+        <div class="container-about-me">
+            <div class="container-text-about-me">
+                <div class="container-name-lawyer">
+                    <h2>Адвокат</h2>
+                    <h1>Ольга Бардадим</h1>
+                </div>
+                <div class="container-text">
+                    <p>Мене звати Ольга Бардадим і я юрист з більш ніж 15-річним досвідом роботи в галузі права. Моя спеціалізація охоплює широкий спектр юридичних послуг, включаючи сімейне право, кримінальний захист, а також вирішення майнових спорів.</p>
+                    <p>Моя головна мета - захистити ваші інтереси і забезпечити справедливість у всіх юридичних питаннях. У своїй практиці я можу розраховувати на глибоке знання законодавства та індивідуальний підхід до кожного випадку. Кожен мій клієнт може розраховувати на ретельне лікування, ретельний аналіз ситуації і розробку найбільш ефективної стратегії захисту.</p>
+                </div>
+            </div>
+            <img class="image-about-me" src="style/image/image_about_me.png" alt="">
+        </div>
+        <ul class="information">
+            <li class="container-information">
+                <h2>21</h2>
+                <p>Років досвіду</p>
+            </li>
+            <li class="container-information">
+                <h2>90%</h2>
+                <p>Виграних справ</p>
+            </li>
+            <li class="container-information">
+                <h2>300</h2>
+                <p>Клієнтів</p>
+            </li>
+        </ul>
+    </section>
+    <section class="advantages">
+        <h2 class="title-section">Переваги роботи зі мною</h2>
+        <div class="container-global container-advantages">
+            <div class="advantage">
+                <h3 class="title-advantage">Досвід та компетентність</h3>
+                <p class="text-advantage">Маю більш ніж 15-річний досвід роботи у різних галузях права, я маю глибокі знання та навички, необхідні для вирішення найскладніших юридичних проблем. Моя практика підтверджена десятками успішно завершених справ та задоволених клієнтів.</p>
+            </div>
+            <div class="advantage">
+                <h3 class="title-advantage">Індивідуальний підхід</h3>
+                <p class="text-advantage">Кожен випадок унікальний, і я завжди уважно вивчаю всі деталі, щоб розробити найбільш ефективну стратегію захисту. Ви можете розраховувати на персоналізований сервіс з урахуванням ваших потреб і побажань.</p>
+            </div>
+            <div class="advantage">
+                <h3 class="title-advantage">Відповідальність, чесність</h3>
+                <p class="text-advantage">Я беру на себе відповідальність за кожну справу, яку беру до виконання, і завжди дію в інтересах клієнта, дотримуючись високих стандартів професійної етики. Ви можете бути впевнені в моєму професіоналізмі та чесності.</p>
+            </div>
+        </div>
+    </section>
+    <section class="services">
+        <h1 class="title-section">Послуги</h1>
+        <ul class="list-services">
+            {% for service in services %}
+                <li class="service">
+                    <a href="#">
+                        <img class="service-image" src="{% static "deps/"|add:service.image %}" alt="{% static "deps/image/alt.png" %}">
+                        <div class="service-container-title">
+                            <h3 class="service-title">{{ service.title }}</h3>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="consultations">
+        <h2 class="title-section">Надаю консультацій з таких питань</h2>
+        <ul class="list-consultations">
+            {% for consultation in consultations %}
+                <li class="consultation">
+                    <a href="#">
+                        <img src="{% static "deps/"|add:consultation.image %}" alt="{% static "deps/image/alt.png" %}" class="consultation-image">
+                        <div class="consultation-container-title">
+                            <h3>{{ consultation.title }}</h3>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="reviews">
+        <h2 class="title-section">Відгуки</h2>
+        <div class="container-global container-reviews">
+            <ul class="list-reviews">
+                {% for review in reviews %}
+                    <li class="review">
+                        <h3 class="name">{{ review.name }}</h3>
+                        <div class="container-stars">
+                            <div class="body-stars">
+                                <div class="stars-active"></div>
+                            </div>
+                            <div class="stars-value">{{ review.stars }}</div>
+                        </div>
+                        <p class="text-review">{{ review.text }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="buttons-left-and-right">
+                <button type="button" class="button-review-left">
+                    <svg width="56" height="38" viewBox="0 0 56 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.23223 17.2322C0.255922 18.2085 0.255922 19.7915 1.23223 20.7678L17.1421 36.6777C18.1184 37.654 19.7014 37.654 20.6777 36.6777C21.654 35.7014 21.654 34.1184 20.6777 33.1421L6.53553 19L20.6777 4.85786C21.654 3.88155 21.654 2.29864 20.6777 1.32233C19.7014 0.34602 18.1184 0.34602 17.1421 1.32233L1.23223 17.2322ZM53 21.5C54.3807 21.5 55.5 20.3807 55.5 19C55.5 17.6193 54.3807 16.5 53 16.5V21.5ZM3 21.5H53V16.5H3V21.5Z" fill="black" />
+                    </svg>
+                </button>
+                <button type="button" class="button-review-right">
+                    <svg width="56" height="38" viewBox="0 0 56 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 16.5C1.61929 16.5 0.5 17.6193 0.5 19C0.5 20.3807 1.61929 21.5 3 21.5V16.5ZM54.7678 20.7678C55.7441 19.7915 55.7441 18.2085 54.7678 17.2322L38.8579 1.32233C37.8816 0.34602 36.2986 0.34602 35.3223 1.32233C34.346 2.29864 34.346 3.88155 35.3223 4.85786L49.4645 19L35.3223 33.1421C34.346 34.1184 34.346 35.7014 35.3223 36.6777C36.2986 37.654 37.8816 37.654 38.8579 36.6777L54.7678 20.7678ZM3 21.5H53V16.5H3V21.5Z" fill="black" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+    <section class="map-and-contacts">
+        <h2 class="title-section">Контакти</h2>
+        <div class="container-global container-map-and-contacts">
+            <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1768.3812444188761!2d34.65500623682807!3d47.64328877123732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dc972b20be3613%3A0xc8d312a93accbcbd!2z0J_QsNGA0LrQvtCy0LDRjyDRg9C7LiwgOSwg0JzQsNGA0LPQsNC90LXRhiwg0JTQvdC10L_RgNC-0L_QtdGC0YDQvtCy0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDUzNDAw!5e0!3m2!1sru!2sua!4v1742379323755!5m2!1sru!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="container-contacts">
+                <img src="style/image/image_in_contact.png" alt="" class="author-image-in-contact">
+                <div class="contacts">
+                    <h1 class="name-author-in-contact">Ольга Бардадим</h1>
+                    <div class="contact-and-address">
+                        <a href="tel:+380 81 123 4567" class="phone">Телефон: +380 81 123 4567</a>
+                        <a href="mailto:" class="email">Email: OlgaBardadym@example.com</a>
+                        <p class="address">Адреса: вул. Центральна, 123, Київ, Україна</p>
+                    </div>
+                    <h2>Наші мережи</h2>
+                    <div class="container-messengers">
+                        <a href="#" class="messenger-link">
+                            <img src="style/svg/viber.svg" class="messenger-logo">
+                        </a>
+                        <a href="#" class="messenger-link">
+                            <img src="style/svg/telegram.svg" class="messenger-logo">
+                        </a>
+                        <a href="#" class="messenger-link">
+                            <img src="style/svg/facebook_messengers.svg" class="messenger-logo">
+                        </a>
+                        <a href="#" class="messenger-link">
+                            <img src="style/svg/whatsapp.svg" class="messenger-logo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block js %}
     <script src="{% static "deps/js/main.js" %}"></script>
-</body>
-</html>
+{% endblock js %}
