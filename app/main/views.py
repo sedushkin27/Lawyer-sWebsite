@@ -79,4 +79,4 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 def about(request):
-    return HttpResponse('About me')
+    return render(request, 'main/about_me.html')

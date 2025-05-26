@@ -1,6 +1,10 @@
 {% extends "main/base.html" %}
 {% load static %}
 
+{% block title %}
+    <title>Адвокат Ольга Бардадим</title>
+{% endblock title %}
+
 {% block css %}
     <link rel="stylesheet" href="{% static "deps/css/main.css" %}">
 {% endblock css %}
@@ -26,7 +30,7 @@
                     <p>Моя головна мета - захистити ваші інтереси і забезпечити справедливість у всіх юридичних питаннях. У своїй практиці я можу розраховувати на глибоке знання законодавства та індивідуальний підхід до кожного випадку. Кожен мій клієнт може розраховувати на ретельне лікування, ретельний аналіз ситуації і розробку найбільш ефективної стратегії захисту.</p>
                 </div>
             </div>
-            <img class="image-about-me" src="style/image/image_about_me.png" alt="">
+            <img class="image-about-me" src="{% static "deps/image/image_about_me.png" %}" alt="">
         </div>
         <ul class="information">
             <li class="container-information">
@@ -126,7 +130,7 @@
         <div class="container-global container-map-and-contacts">
             <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1768.3812444188761!2d34.65500623682807!3d47.64328877123732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dc972b20be3613%3A0xc8d312a93accbcbd!2z0J_QsNGA0LrQvtCy0LDRjyDRg9C7LiwgOSwg0JzQsNGA0LPQsNC90LXRhiwg0JTQvdC10L_RgNC-0L_QtdGC0YDQvtCy0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDUzNDAw!5e0!3m2!1sru!2sua!4v1742379323755!5m2!1sru!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div class="container-contacts">
-                <img src="style/image/image_in_contact.png" alt="" class="author-image-in-contact">
+                <img src="{% static "deps/image/image_in_contact.png" %} " alt="" class="author-image-in-contact">
                 <div class="contacts">
                     <h1 class="name-author-in-contact">Ольга Бардадим</h1>
                     <div class="contact-and-address">
@@ -137,16 +141,16 @@
                     <h2>Наші мережи</h2>
                     <div class="container-messengers">
                         <a href="#" class="messenger-link">
-                            <img src="style/svg/viber.svg" class="messenger-logo">
+                            <img src="{% static "deps/svg/viber.svg" %}" class="messenger-logo">
                         </a>
                         <a href="#" class="messenger-link">
-                            <img src="style/svg/telegram.svg" class="messenger-logo">
+                            <img src="{% static "deps/svg/telegram.svg" %}" class="messenger-logo">
                         </a>
                         <a href="#" class="messenger-link">
-                            <img src="style/svg/facebook_messengers.svg" class="messenger-logo">
+                            <img src="{% static "deps/svg/facebook_messengers.svg" %}" class="messenger-logo">
                         </a>
                         <a href="#" class="messenger-link">
-                            <img src="style/svg/whatsapp.svg" class="messenger-logo">
+                            <img src="{% static "deps/svg/whatsapp.svg" %}" class="messenger-logo">
                         </a>
                     </div>
                 </div>
@@ -156,5 +160,5 @@
 {% endblock content %}
 
 {% block js %}
-    <script src="{% static "deps/js/main.js" %}"></script>
+
 {% endblock js %}
