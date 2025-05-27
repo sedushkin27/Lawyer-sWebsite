@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Політика конфіденційності</title>
+{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/conditioning_policy.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <section class="section-policy">
+        <div class="container-global container-policy">
+            <h1>Політика конфіденційності</h1>
+            <p>{{ about_policy }}</p>
+            {% for element in elements_policy %}
+                <div class="element-policy">
+                    <h2>{{element.title}}</h2>
+                    <p>{{element.first_text}}</p>
+                    {% if element.list|length > 0 %}
+                        <ul>
+                            {% for i in element.list %}
+                                <li>{{ i }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% if element.second_text %}
+                        <p>{{ element.second_text }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <p>{{ date_updated }}</p>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}
