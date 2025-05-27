@@ -38,7 +38,7 @@
         </form>
     </div>
     <header>
-        <a href="/main.html" class="container-logo">
+        <a href="{% url "main:index" %}" class="container-logo">
             <h1 class="logo">Ольга Бардадим</h1>
             <div>
                 <span><hr></span>
@@ -54,9 +54,9 @@
             </div>
             <div class="drop-menu">
                 <ul>
-                    <li><a href="/main.html" class="link">Головна сторінка</a></li>
+                    <li><a href="{% url "main:index" %}" class="link">Головна сторінка</a></li>
                     <li><a href="/services.html" class="link">Наші послуги</a></li>
-                    <li><a href="/about_me.html" class="link">Про мене</a></li>
+                    <li><a href="{% url "main:about" %}" class="link">Про мене</a></li>
                     <li><button id="call_us" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button></li>
                     <li><a href="/consultation.html" id="sing_up_for_consultation" class="button button-sing-up-for-consultation" title="Записатися на консультацію">Обрати консультацію</a></li>
                 </ul> 
@@ -71,12 +71,12 @@
     <footer>
         <div class="container-global container-footer">
             <ul class="list-links-in-footer">
-                <li><a href="/main.html">Головна</a></li>
+                <li><a href="{% url "main:index" %}">Головна</a></li>
                 <li><a href="/services.html">Мої послуги</a></li>
-                <li><a href="/about_me.html">Про мене</a></li>
+                <li><a href="{% url "main:about" %}">Про мене</a></li>
                 <li><a href="#">Зв'язатися зі мною</a></li>
                 <li><a href="/consultation.html">Отримати консультацію</a></li>
-                <li><a href="/conditioning_policy.html">Політика кондифіціальності</a></li>
+                <li><a href="{% url "main:conditioning_policy" %}">Політика кондифіціальності</a></li>
                 <li><a href="#">Публічна офорта</a></li>
             </ul>
             <div class="container-logo">
