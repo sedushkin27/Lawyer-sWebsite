@@ -1,0 +1,62 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>{{ title_service }}</title>
+{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/services.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <section class="section-services">
+        <div class="container-global container-services">
+            <div class="container-text">
+                <h1>Послуги</h1>
+                <p>Тут ви знайдете найпоширеніші послуги, які я готовий надати вам. <br>Якщо ви не знайшли потрібну послугу у переліку, не соромтеся зв'язатися зі мною - разом ми знайдемо оптимальне рішення для вашої потреби.</p>
+            </div>
+            <div class="services">
+                <div class="image-service-and-list-sercices">
+                    <img src="{% static "deps/user_image/"|add:image_service %}" alt="" class="image-service">
+                    <button type="button" class="opening-list-services">{{ title_service }}</button>
+                    <ul class="list-services">
+                        {% for service in another_services %}
+                            <li class="service"><a href="{% url "services:index" %}">{{ service }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="title-count-text-about-service">
+                    <div class="title-and-count">
+                        <h1 class="title-service">{{ title_service }}</h1>
+                        <h2 class="count-service">Приблизна ціна: {{ count_service }} грн</h2>
+                    </div>
+                    <p class="text-service">{{ about_service }}</p>
+                    <div class="container-buttons">
+                        <button id="call_us_in_service" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button>
+                        <button type="button" class="button-sing-up-for-consultation">Замовити послугу</button>
+                    </div>
+                    <div class="that-you-get">
+                        <h2>Що ви отримаєте:</h2>
+                        <ul class="list-that-you-get">
+                            {% for element in list_what_get %}
+                                <li class="element-list-that-you-get">
+                                    <h3 class="list-title">{{ element.title }}</h3>
+                                    <ul class="list-in-list-that-you-get">
+                                        {% for i in element.list %}
+                                            <li>{{ i }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

@@ -55,7 +55,7 @@
             <div class="drop-menu">
                 <ul>
                     <li><a href="{% url "main:index" %}" class="link">Головна сторінка</a></li>
-                    <li><a href="/services.html" class="link">Наші послуги</a></li>
+                    <li><a href="{% url "services:index" %}" class="link">Наші послуги</a></li>
                     <li><a href="{% url "main:about" %}" class="link">Про мене</a></li>
                     <li><button id="call_us" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button></li>
                     <li><a href="/consultation.html" id="sing_up_for_consultation" class="button button-sing-up-for-consultation" title="Записатися на консультацію">Обрати консультацію</a></li>
@@ -72,7 +72,7 @@
         <div class="container-global container-footer">
             <ul class="list-links-in-footer">
                 <li><a href="{% url "main:index" %}">Головна</a></li>
-                <li><a href="/services.html">Мої послуги</a></li>
+                <li><a href="{% url "services:index" %}">Мої послуги</a></li>
                 <li><a href="{% url "main:about" %}">Про мене</a></li>
                 <li><a href="#">Зв'язатися зі мною</a></li>
                 <li><a href="/consultation.html">Отримати консультацію</a></li>
