@@ -33,6 +33,7 @@ class ServiceSection (models.Model):
     def __str__(self):
         return self.title
 
+
 class SectionItem(models.Model):
     section = models.ForeignKey(ServiceSection, on_delete=models.CASCADE, verbose_name=("До якої блоку відноситися"), related_name=('items'))
     text = models.TextField("Елемент списку")

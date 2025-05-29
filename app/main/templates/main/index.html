@@ -69,7 +69,7 @@
         <ul class="list-services">
             {% for service in services %}
                 <li class="service">
-                    <a href="#">
+                    <a href="{% url "services:index" %}">
                         <img class="service-image" src="{% static "deps/"|add:service.image %}" alt="{% static "deps/image/alt.png" %}">
                         <div class="service-container-title">
                             <h3 class="service-title">{{ service.title }}</h3>

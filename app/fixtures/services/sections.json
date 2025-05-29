@@ -1,0 +1,50 @@
+[
+    {
+        "model": "services.servicesection",
+        "pk": 1,
+        "fields": {
+            "service": 1,
+            "title": "Аналіз законодавчої бази:"
+        }
+    },
+    {
+        "model": "services.servicesection",
+        "pk": 2,
+        "fields": {
+            "service": 1,
+            "title": "Хто підлягає мобілізації:"
+        }
+    },
+    {
+        "model": "services.servicesection",
+        "pk": 3,
+        "fields": {
+            "service": 1,
+            "title": "Підстави для відстрочки та звільнення:"
+        }
+    },
+    {
+        "model": "services.servicesection",
+        "pk": 4,
+        "fields": {
+            "service": 1,
+            "title": "Порядок дій при отриманні повістки:"
+        }
+    },
+    {
+        "model": "services.servicesection",
+        "pk": 5,
+        "fields": {
+            "service": 1,
+            "title": "Захист від порушень:"
+        }
+    },
+    {
+        "model": "services.servicesection",
+        "pk": 6,
+        "fields": {
+            "service": 1,
+            "title": "Індивідуальні відповіді:"
+        }
+    }
+]

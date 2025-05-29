@@ -1,47 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from services.models import Services
+
 # Create your views here.
 def index(request):
+
+    services = Services.objects.values('title', 'slug', 'image')
+
     context = {
-        'services': [
-            {
-                'title': 'Кримінальна практика',
-                'image': 'user_image/1.png',
-            },
-            {
-                'title': 'Адміністративна практика',
-                'image': 'user_image/2.png',
-            },
-            {
-                'title': 'Міграційні послуги',
-                'image': 'user_image/3.png',
-            },
-            {
-                'title': 'Цивільна практика',
-                'image': 'user_image/4.png',
-            },
-            {
-                'title': 'Інтелектуальна власність',
-                'image': 'user_image/5.png',
-            },
-            {
-                'title': 'Податкова практика',
-                'image': 'user_image/6.png',
-            },
-            {
-                'title': 'Військове право',
-                'image': 'user_image/7.png',
-            },
-            {
-                'title': 'Адвокат для бізнесу',
-                'image': 'user_image/8.png',
-            },
-            {
-                'title': 'Трудове право',
-                'image': 'user_image/9.png',
-            },
-        ],
+        'services': services,
 
         'consultations': [
             {
