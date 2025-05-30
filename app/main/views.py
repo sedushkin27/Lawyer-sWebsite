@@ -1,12 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from services.models import Services
+from services.models import Service
 
 # Create your views here.
 def index(request):
 
-    services = Services.objects.values('title', 'slug', 'image')
+    services = Service.objects.values('title', 'slug', 'image')
 
     context = {
         'services': services,

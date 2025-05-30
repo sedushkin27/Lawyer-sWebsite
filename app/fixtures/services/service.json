@@ -1,99 +1,99 @@
 [
     {
-        "model": "services.services",
+        "model": "services.service",
         "pk": 1,
         "fields": {
             "title": "Кримінальна практика",
             "slug": "kriminalna-praktika",
-            "image": "services/service_images/1.png",
+            "image": "service_images/1.png",
             "price": "3400.00",
             "description": "Справи у кримінальному праві - це складний та всебічний процес, що охоплює як розслідування злочину, так і його судовий розгляд.Одноосібне протистояння позиції сторони обвинувачення може обернутися для вас катастрофою. Слідство володіє значним арсеналом методів впливу, а у вас, ймовірно, не буде ані необхідних правових інструментів, ані знань процесуального законодавства, щоб адекватно захищати свої права та інтереси. Звернувшись до компетентного кримінального адвоката, ви отримуєте професійну допомогу і позбавлення від тиску з боку органів слідства."
         }
     },
     {
-        "model": "services.services",
+        "model": "services.service",
         "pk": 2,
         "fields": {
             "title": "Міграційні послуги",
             "slug": "migracijni-poslugi",
-            "image": "services/service_images/3.png",
+            "image": "service_images/3.png",
             "price": "0.00",
             "description": ""
         }
     },
     {
-        "model": "services.services",
+        "model": "services.service",
         "pk": 3,
         "fields": {
             "title": "Цивільна практика",
             "slug": "civilna-praktika",
-            "image": "services/service_images/4.png",
+            "image": "service_images/4.png",
             "price": "0.00",
             "description": ""
         }
     },
     {
-        "model": "services.services",
+        "model": "services.service",
         "pk": 4,
         "fields": {
             "title": "Інтелектуальна власність",
             "slug": "intelektualna-vlasnist",
-            "image": "services/service_images/5.png",
+            "image": "service_images/5.png",
             "price": "0.00",
             "description": ""
         }
     },
     {
-        "model": "services.services",
+        "model": "services.service",
         "pk": 5,
         "fields": {
             "title": "Податкова практика",
             "slug": "podatkova-praktika",
-            "image": "services/service_images/6.png",
+            "image": "service_images/6.png",
             "price": "0.00",
             "description": ""
         }
     },
     {
-        "model": "services.services",
+        "model": "services.service",
         "pk": 6,
         "fields": {
             "title": "Військове право",
             "slug": "vijskove-pravo",
-            "image": "services/service_images/7.png",
+            "image": "service_images/7.png",
             "price": "0.00",
             "description": ""
         }
     },
     {
-        "model": "services.services",
+        "model": "services.service",
         "pk": 7,
         "fields": {
             "title": "Адвокат для бізнесу",
             "slug": "advokat-dlya-biznesu",
-            "image": "services/service_images/8.png",
+            "image": "service_images/8.png",
             "price": "0.00",
             "description": ""
         }
     },
     {
-        "model": "services.services",
+        "model": "services.service",
         "pk": 8,
         "fields": {
             "title": "Трудове право",
             "slug": "trudove-pravo",
-            "image": "services/service_images/9.png",
+            "image": "service_images/9.png",
             "price": "0.00",
             "description": ""
         }
     },
     {
-        "model": "services.services",
+        "model": "services.service",
         "pk": 9,
         "fields": {
             "title": "Адміністративна практика",
             "slug": "administrativna-praktika",
-            "image": "services/service_images/2.png",
+            "image": "service_images/2.png",
             "price": "0.00",
             "description": ""
         }

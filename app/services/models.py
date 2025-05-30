@@ -1,11 +1,11 @@
 from django.db import models
 
 # Create your models here.
-class Services(models.Model):
+class Service(models.Model):
 
     title = models.CharField(("Назва"), max_length=50, unique=True)
     slug = models.SlugField(('Url'), unique=True, blank=True, null=True)
-    image = models.ImageField(("Зображення"), upload_to='services/service_images', blank=True, null=True)
+    image = models.ImageField(("Зображення"), upload_to='service_images', blank=True, null=True)
     price = models.DecimalField(("Ціна"), max_digits=7, decimal_places=2, default=0.00)
     description = models.TextField(("Опис"), blank=True, null=True)
 
@@ -22,7 +22,7 @@ class Services(models.Model):
 
 class ServiceSection (models.Model):
 
-    service = models.ForeignKey(Services, related_name=('sections'), verbose_name=("До якої послуги відноситися"), on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, related_name=('sections'), verbose_name=("До якої послуги відноситися"), on_delete=models.CASCADE)
     title = models.CharField(("Заголовок блоку"), max_length=50, unique=True)
 
     class Meta:

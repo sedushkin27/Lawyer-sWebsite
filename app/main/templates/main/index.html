@@ -70,7 +70,11 @@
             {% for service in services %}
                 <li class="service">
                     <a href="{% url "services:index" %}">
-                        <img class="service-image" src="{% static "deps/"|add:service.image %}" alt="{% static "deps/image/alt.png" %}">
+                        {% if service.image %}
+                            <img class="service-image" src="media/{{ service.image }}" alt="Зображення {{service.title}}">
+                        {% else %}
+                            <img class="service-image" src="{% static "deps/image/alt.png" %}" alt="Зображення не знайдено">
+                        {% endif %}
                         <div class="service-container-title">
                             <h3 class="service-title">{{ service.title }}</h3>
                         </div>
@@ -85,7 +89,7 @@
             {% for consultation in consultations %}
                 <li class="consultation">
                     <a href="#">
-                        <img src="{% static "deps/"|add:consultation.image %}" alt="{% static "deps/image/alt.png" %}" class="consultation-image">
+                        <img src="{% static "deps/image/alt.png" %}" class="consultation-image">
                         <div class="consultation-container-title">
                             <h3>{{ consultation.title }}</h3>
                         </div>
