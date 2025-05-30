@@ -1,0 +1,102 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>{{ service.title }}</title>
+{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/consultation.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <section class="section-consultation">
+        <div class="container-global container-consultation">
+            <ul class="list-consultation">
+                <li class="consultation">
+                    <a href="#">
+                        <img src="style/user_image/10.png" alt="" class="consultation-image">
+                        <div class="consultation-container-title">
+                            <h1>Сімейні справи</h1>
+                        </div>
+                    </a>
+                </li>
+                <li class="consultation">
+                    <a href="#">
+                        <img src="style/user_image/11.png" alt="" class="consultation-image">
+                        <div class="consultation-container-title">
+                            <h1>Житлові суперечки</h1>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="information-consultation">
+                <div class="container-image-title-buttons">
+                    <img src="style/user_image/12.png" alt="">
+                    <div class="container-title-and-buttons">
+                        <h1>Все про мобілізацію у воєнний час</h1>
+                        <div class="container-buttons">
+                            <a href="/registration-form-consultation.html" class="button button-sing-up-for-consultation">Записатися на цю консультацию</a>
+                            <button id="call_us_in_consultation" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-consultation">
+                    <h2>Опис даной консультації:</h2>
+                    <p>У період воєнного стану питання мобілізації стають особливо актуальними для багатьох громадян України. Якщо ви отримали повістку, маєте сумніви щодо законності дій військкомату, або просто хочете зрозуміти свої права та обов’язки, адвокат Ольга Бардадим готова допомогти вам розібратися у всіх нюансах цього процесу. Ця консультація створена, щоб надати вам повне уявлення про мобілізацію та забезпечити юридичну підтримку у складних ситуаціях.</p>
+                </div>
+                <div class="that-you-get">
+                    <h2>Що ви отримаєте під час консультації:</h2>
+                    <ul class="list-that-you-get">
+                        <li class="element-list-that-you-get">
+                            <h3 class="list-title">Аналіз законодавчої бази:</h3>
+                            <ul class="list-in-list-that-you-get">
+                                <li>Огляд ключових положень Закону України "Про мобілізаційну підготовку та мобілізацію", а також змін, внесених у зв’язку з воєнним станом. </li>
+                                <li>Роз’яснення указів Президента України та постанов Кабінету Міністрів, які регулюють мобілізаційні заходи станом на березень 2025 року.</li>
+                            </ul>
+                        </li>
+                        <li class="element-list-that-you-get">
+                            <h3 class="list-title">Хто підлягає мобілізації:</h3>
+                            <ul class="list-in-list-that-you-get">
+                                <li>Детальний розбір вікових категорій, стану здоров’я та інших критеріїв, які впливають на призов. </li>
+                                <li>Інформація про спеціальні категорії громадян: студенти, батьки багатодітних сімей, єдині годувальники, працівники критичної інфраструктури тощо.</li>
+                            </ul>
+                        </li>
+                        <li class="element-list-that-you-get">
+                            <h3 class="list-title">Підстави для відстрочки та звільнення:</h3>
+                            <ul class="list-in-list-that-you-get">
+                                <li>Перелік законних причин для отримання відстрочки (сімейні обставини, стан здоров’я, бронювання на роботі). </li>
+                                <li>Порядок оформлення документів для підтвердження права на відстрочку чи звільнення від призову.</li>
+                            </ul>
+                        </li>
+                        <li class="element-list-that-you-get">
+                            <h3 class="list-title">Порядок дій при отриманні повістки:</h3>
+                            <ul class="list-in-list-that-you-get">
+                                <li>Види повісток та їх юридична сила: що робити, якщо повістку вручили неналежним чином? </li>
+                                <li>Ваші права та обов’язки під час проходження медкомісії та явки до військкомату.</li>
+                            </ul>
+                        </li>
+                        <li class="element-list-that-you-get">
+                            <h3 class="list-title">Захист від порушень:</h3>
+                            <ul class="list-in-list-that-you-get">
+                                <li>Як оскаржити незаконні дії працівників ТЦК та СП (територіальних центрів комплектування та соціальної підтримки). </li>
+                                <li>Порядок подання скарг та звернень до суду у разі порушення ваших прав. </li>
+                                <li>Приклади реальних ситуацій та способи їх вирішення.</li>
+                            </ul>
+                        </li>
+                        <li class="element-list-that-you-get">
+                            <h3 class="list-title">Індивідуальні відповіді:</h3>
+                            <ul class="list-in-list-that-you-get">
+                                <li>Можливість поставити запитання, які стосуються саме вашої ситуації: від перевірки документів до підготовки до судового розгляду.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}
