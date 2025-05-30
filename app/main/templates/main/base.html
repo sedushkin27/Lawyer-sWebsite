@@ -1,4 +1,5 @@
 {% load static %}
+{% load service_tegs %}
 
 <!DOCTYPE html>
 <html lang="ua">
@@ -12,12 +13,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="preload" href="{% static 'deps/css/everywhere.css' %}" as="style">
     <link rel="stylesheet" href="{% static "deps/css/everywhere.css" %}">
     {% block css %}
     
     {% endblock css %}
 </head>
-<body data-barba="wrapper">
+<body>
     <div class="transition-overlay">
         <div class="transition-logo"></div>
     </div>
@@ -55,7 +57,10 @@
             <div class="drop-menu">
                 <ul>
                     <li><a href="{% url "main:index" %}" class="link">Головна сторінка</a></li>
-                    <li><a href="{% url "services:index" %}" class="link">Наші послуги</a></li>
+                    {% first_slug_service as first_service %}
+                    {% if first_service %}
+                        <li><a href="{% url "services:index" slug=first_service.slug %}" class="link">Наші послуги</a></li>
+                    {% endif %}
                     <li><a href="{% url "main:about" %}" class="link">Про мене</a></li>
                     <li><button id="call_us" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button></li>
                     <li><a href="/consultation.html" id="sing_up_for_consultation" class="button button-sing-up-for-consultation" title="Записатися на консультацію">Обрати консультацію</a></li>
@@ -72,7 +77,9 @@
         <div class="container-global container-footer">
             <ul class="list-links-in-footer">
                 <li><a href="{% url "main:index" %}">Головна</a></li>
-                <li><a href="{% url "services:index" %}">Мої послуги</a></li>
+                {% if first_service %}
+                    <li><a href="{% url "services:index" slug=first_service.slug %}">Наші послуги</a></li>
+                {% endif %}
                 <li><a href="{% url "main:about" %}">Про мене</a></li>
                 <li><a href="#">Зв'язатися зі мною</a></li>
                 <li><a href="/consultation.html">Отримати консультацію</a></li>

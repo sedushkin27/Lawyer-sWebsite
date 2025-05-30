@@ -5,5 +5,5 @@ from services.views import services
 app_name = 'services'
 
 urlpatterns = [
-    path('', services, name='index')
+    path('<slug:slug>/', services, name='index')
 ]

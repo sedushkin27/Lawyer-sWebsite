@@ -6,7 +6,7 @@ from services.models import Service
 # Create your views here.
 def index(request):
 
-    services = Service.objects.values('title', 'slug', 'image')
+    services = Service.objects.only('title', 'slug', 'image')
 
     context = {
         'services': services,

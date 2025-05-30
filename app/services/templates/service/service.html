@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>{{ title_service }}</title>
+    <title>{{ service.title }}</title>
 {% endblock title %}
 
 {% block css %}
@@ -18,20 +18,24 @@
             </div>
             <div class="services">
                 <div class="image-service-and-list-sercices">
-                    <img src="{% static "deps/user_image/"|add:image_service %}" alt="" class="image-service">
-                    <button type="button" class="opening-list-services">{{ title_service }}</button>
+                    {% if service.image %}
+                        <img class="service-image" src="{{ service.image.url }}" alt="Зображення {{service.title}}">
+                    {% else %}
+                        <img class="service-image" src="{% static "deps/image/alt.png" %}" alt="Зображення не знайдено">
+                    {% endif %}
+                    <button type="button" class="opening-list-services">{{ service.title }}</button>
                     <ul class="list-services">
-                        {% for service in another_services %}
-                            <li class="service"><a href="{% url "services:index" %}">{{ service }}</a></li>
+                        {% for anouther_service in another_services %}
+                            <li class="service"><a href="{% url "services:index" slug=anouther_service.slug %}">{{ anouther_service.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
                 <div class="title-count-text-about-service">
                     <div class="title-and-count">
-                        <h1 class="title-service">{{ title_service }}</h1>
-                        <h2 class="count-service">Приблизна ціна: {{ count_service }} грн</h2>
+                        <h1 class="title-service">{{ service.title }}</h1>
+                        <h2 class="count-service">Приблизна ціна: {{ service.price }} грн</h2>
                     </div>
-                    <p class="text-service">{{ about_service }}</p>
+                    <p class="text-service">{{ service.description }}</p>
                     <div class="container-buttons">
                         <button id="call_us_in_service" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button>
                         <button type="button" class="button-sing-up-for-consultation">Замовити послугу</button>
@@ -39,12 +43,12 @@
                     <div class="that-you-get">
                         <h2>Що ви отримаєте:</h2>
                         <ul class="list-that-you-get">
-                            {% for element in list_what_get %}
+                            {% for section in service.sections.all  %}
                                 <li class="element-list-that-you-get">
-                                    <h3 class="list-title">{{ element.title }}</h3>
+                                    <h3 class="list-title">{{ section.title }}</h3>
                                     <ul class="list-in-list-that-you-get">
-                                        {% for i in element.list %}
-                                            <li>{{ i }}</li>
+                                        {% for item in section.items.all %}
+                                            <li>{{ item.text }}</li>
                                         {% endfor %}
                                     </ul>
                                 </li>

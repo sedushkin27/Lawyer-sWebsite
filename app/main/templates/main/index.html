@@ -69,9 +69,9 @@
         <ul class="list-services">
             {% for service in services %}
                 <li class="service">
-                    <a href="{% url "services:index" %}">
+                    <a href="{% url "services:index" slug=service.slug %}">
                         {% if service.image %}
-                            <img class="service-image" src="media/{{ service.image }}" alt="Зображення {{service.title}}">
+                            <img class="service-image" src="{{ service.image.url }}" alt="Зображення {{service.title}}">
                         {% else %}
                             <img class="service-image" src="{% static "deps/image/alt.png" %}" alt="Зображення не знайдено">
                         {% endif %}
