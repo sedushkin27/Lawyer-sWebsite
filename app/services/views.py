@@ -14,3 +14,14 @@ def services(request, slug):
         'another_services': another_services,
     }
     return render(request, 'service/service.html', context)
+
+def consultation(request, slug):
+    consultation = get_object_or_404(Service.objects.prefetch_related(
+        Prefetch('sections__items')  # Получить секции и вложенные пункты
+    ), slug=slug)
+    another_consultation = Service.objects.exclude(pk=consultation.pk).only('title', 'slug', 'image')
+    context = {
+        'consultation': consultation,
+        'another_consultation': another_consultation,
+    }
+    return render(request, 'service/consultation.thml', context) 

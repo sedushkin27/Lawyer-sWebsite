@@ -8,6 +8,7 @@ class Service(models.Model):
     image = models.ImageField(("Зображення"), upload_to='service_images', blank=True, null=True)
     price = models.DecimalField(("Ціна"), max_digits=7, decimal_places=2, default=0.00)
     description = models.TextField(("Опис"), blank=True, null=True)
+    # types = 
 
     class Meta:
         db_table = 'service'
