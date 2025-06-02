@@ -64,71 +64,81 @@
             </div>
         </div>
     </section>
-    <section class="services">
-        <h1 class="title-section">Послуги</h1>
-        <ul class="list-services">
-            {% for service in services %}
-                <li class="service">
-                    <a href="{% url "services:index" slug=service.slug %}">
-                        {% if service.image %}
-                            <img class="service-image" src="{{ service.image.url }}" alt="Зображення {{service.title}}">
-                        {% else %}
-                            <img class="service-image" src="{% static "deps/image/alt.png" %}" alt="Зображення не знайдено">
-                        {% endif %}
-                        <div class="service-container-title">
-                            <h3 class="service-title">{{ service.title }}</h3>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
-    <section class="consultations">
-        <h2 class="title-section">Надаю консультацій з таких питань</h2>
-        <ul class="list-consultations">
-            {% for consultation in consultations %}
-                <li class="consultation">
-                    <a href="#">
-                        <img src="{% static "deps/image/alt.png" %}" class="consultation-image">
-                        <div class="consultation-container-title">
-                            <h3>{{ consultation.title }}</h3>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
-    <section class="reviews">
-        <h2 class="title-section">Відгуки</h2>
-        <div class="container-global container-reviews">
-            <ul class="list-reviews">
-                {% for review in reviews %}
-                    <li class="review">
-                        <h3 class="name">{{ review.name }}</h3>
-                        <div class="container-stars">
-                            <div class="body-stars">
-                                <div class="stars-active"></div>
+    {% if services %}
+        <section class="services">
+            <h1 class="title-section">Послуги</h1>
+            <ul class="list-services">
+                {% for service in services %}
+                    <li class="service">
+                        <a href="{% url "services:index" slug=service.slug %}">
+                            {% if service.image %}
+                                <img class="service-image" src="{{ service.image.url }}" alt="Зображення {{service.title}}">
+                            {% else %}
+                                <img class="service-image" src="{% static "deps/image/alt.png" %}" alt="Зображення не знайдено">
+                            {% endif %}
+                            <div class="service-container-title">
+                                <h3 class="service-title">{{ service.title }}</h3>
                             </div>
-                            <div class="stars-value">{{ review.stars }}</div>
-                        </div>
-                        <p class="text-review">{{ review.text }}</p>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>
-            <div class="buttons-left-and-right">
-                <button type="button" class="button-review-left">
-                    <svg width="56" height="38" viewBox="0 0 56 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.23223 17.2322C0.255922 18.2085 0.255922 19.7915 1.23223 20.7678L17.1421 36.6777C18.1184 37.654 19.7014 37.654 20.6777 36.6777C21.654 35.7014 21.654 34.1184 20.6777 33.1421L6.53553 19L20.6777 4.85786C21.654 3.88155 21.654 2.29864 20.6777 1.32233C19.7014 0.34602 18.1184 0.34602 17.1421 1.32233L1.23223 17.2322ZM53 21.5C54.3807 21.5 55.5 20.3807 55.5 19C55.5 17.6193 54.3807 16.5 53 16.5V21.5ZM3 21.5H53V16.5H3V21.5Z" fill="black" />
-                    </svg>
-                </button>
-                <button type="button" class="button-review-right">
-                    <svg width="56" height="38" viewBox="0 0 56 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 16.5C1.61929 16.5 0.5 17.6193 0.5 19C0.5 20.3807 1.61929 21.5 3 21.5V16.5ZM54.7678 20.7678C55.7441 19.7915 55.7441 18.2085 54.7678 17.2322L38.8579 1.32233C37.8816 0.34602 36.2986 0.34602 35.3223 1.32233C34.346 2.29864 34.346 3.88155 35.3223 4.85786L49.4645 19L35.3223 33.1421C34.346 34.1184 34.346 35.7014 35.3223 36.6777C36.2986 37.654 37.8816 37.654 38.8579 36.6777L54.7678 20.7678ZM3 21.5H53V16.5H3V21.5Z" fill="black" />
-                    </svg>
-                </button>
+        </section>
+    {% endif %}
+    {% if consultations %}
+        <section class="consultations">
+            <h2 class="title-section">Надаю консультацій з таких питань</h2>
+            <ul class="list-consultations">
+                {% for consultation in consultations %}
+                    <li class="consultation">
+                        <a href="{% url "services:consultation" slug=consultation.slug %}">
+                            {% if consultation.image %}
+                                <img src="{{ consultation.image.url }}" class="consultation-image" alt="Зображення {{consultation.title}}">
+                            {% else %}
+                                <img src="{% static "deps/image/alt.png" %}" class="consultation-image" alt="Зображення не знайдено">
+                            {% endif %}
+                            <div class="consultation-container-title">
+                                <h3 class="consultation-title">{{ consultation.title }}</h3>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+    {% if reviews %}
+        <section class="reviews">
+            <h2 class="title-section">Відгуки</h2>
+            <div class="container-global container-reviews">
+                <ul class="list-reviews">
+                    {% for review in reviews %}
+                        <li class="review">
+                            <h3 class="name">{{ review.name }}</h3>
+                            <div class="container-stars">
+                                <div class="body-stars">
+                                    <div class="stars-active"></div>
+                                </div>
+                                <div class="stars-value">{{ review.stars }}</div>
+                            </div>
+                            <p class="text-review">{{ review.text }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="buttons-left-and-right">
+                    <button type="button" class="button-review-left">
+                        <svg width="56" height="38" viewBox="0 0 56 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.23223 17.2322C0.255922 18.2085 0.255922 19.7915 1.23223 20.7678L17.1421 36.6777C18.1184 37.654 19.7014 37.654 20.6777 36.6777C21.654 35.7014 21.654 34.1184 20.6777 33.1421L6.53553 19L20.6777 4.85786C21.654 3.88155 21.654 2.29864 20.6777 1.32233C19.7014 0.34602 18.1184 0.34602 17.1421 1.32233L1.23223 17.2322ZM53 21.5C54.3807 21.5 55.5 20.3807 55.5 19C55.5 17.6193 54.3807 16.5 53 16.5V21.5ZM3 21.5H53V16.5H3V21.5Z" fill="black" />
+                        </svg>
+                    </button>
+                    <button type="button" class="button-review-right">
+                        <svg width="56" height="38" viewBox="0 0 56 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 16.5C1.61929 16.5 0.5 17.6193 0.5 19C0.5 20.3807 1.61929 21.5 3 21.5V16.5ZM54.7678 20.7678C55.7441 19.7915 55.7441 18.2085 54.7678 17.2322L38.8579 1.32233C37.8816 0.34602 36.2986 0.34602 35.3223 1.32233C34.346 2.29864 34.346 3.88155 35.3223 4.85786L49.4645 19L35.3223 33.1421C34.346 34.1184 34.346 35.7014 35.3223 36.6777C36.2986 37.654 37.8816 37.654 38.8579 36.6777L54.7678 20.7678ZM3 21.5H53V16.5H3V21.5Z" fill="black" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    {% endif %}
     <section class="map-and-contacts">
         <h2 class="title-section">Контакти</h2>
         <div class="container-global container-map-and-contacts">

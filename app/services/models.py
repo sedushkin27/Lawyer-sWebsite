@@ -3,12 +3,22 @@ from django.db import models
 # Create your models here.
 class Service(models.Model):
 
+    TYPE_CHOICES = [
+        ('service', 'Послуга'),
+        ('consultation', 'Консультація'),
+    ]
+
     title = models.CharField(("Назва"), max_length=50, unique=True)
     slug = models.SlugField(('Url'), unique=True, blank=True, null=True)
     image = models.ImageField(("Зображення"), upload_to='service_images', blank=True, null=True)
     price = models.DecimalField(("Ціна"), max_digits=7, decimal_places=2, default=0.00)
     description = models.TextField(("Опис"), blank=True, null=True)
-    # types = 
+    service_type = models.CharField(
+        ("Тип"),
+        max_length=20,
+        choices=TYPE_CHOICES,
+        default='service',
+    )
 
     class Meta:
         db_table = 'service'

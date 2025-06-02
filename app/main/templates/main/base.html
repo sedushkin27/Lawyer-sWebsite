@@ -1,5 +1,5 @@
 {% load static %}
-{% load service_tegs %}
+{% load service_tags %}
 
 <!DOCTYPE html>
 <html lang="ua">
@@ -63,7 +63,10 @@
                     {% endif %}
                     <li><a href="{% url "main:about" %}" class="link">Про мене</a></li>
                     <li><button id="call_us" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button></li>
-                    <li><a href="/consultation.html" id="sing_up_for_consultation" class="button button-sing-up-for-consultation" title="Записатися на консультацію">Обрати консультацію</a></li>
+                    {% first_slug_consultation as first_consultation %}
+                    {% if first_consultation %}
+                        <li><a href="{% url "services:consultation" slug=first_consultation.slug %}" id="sing_up_for_consultation" class="button button-sing-up-for-consultation" title="Записатися на консультацію">Обрати консультацію</a></li>
+                    {% endif %}
                 </ul> 
             </div>
         </nav>

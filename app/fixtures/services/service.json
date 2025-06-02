@@ -7,7 +7,8 @@
             "slug": "kriminalna-praktika",
             "image": "service_images/1.png",
             "price": "3400.00",
-            "description": "Справи у кримінальному праві - це складний та всебічний процес, що охоплює як розслідування злочину, так і його судовий розгляд.Одноосібне протистояння позиції сторони обвинувачення може обернутися для вас катастрофою. Слідство володіє значним арсеналом методів впливу, а у вас, ймовірно, не буде ані необхідних правових інструментів, ані знань процесуального законодавства, щоб адекватно захищати свої права та інтереси. Звернувшись до компетентного кримінального адвоката, ви отримуєте професійну допомогу і позбавлення від тиску з боку органів слідства."
+            "description": "Справи у кримінальному праві - це складний та всебічний процес, що охоплює як розслідування злочину, так і його судовий розгляд.Одноосібне протистояння позиції сторони обвинувачення може обернутися для вас катастрофою. Слідство володіє значним арсеналом методів впливу, а у вас, ймовірно, не буде ані необхідних правових інструментів, ані знань процесуального законодавства, щоб адекватно захищати свої права та інтереси. Звернувшись до компетентного кримінального адвоката, ви отримуєте професійну допомогу і позбавлення від тиску з боку органів слідства.",
+            "service_type": "service"
         }
     },
     {
@@ -18,7 +19,8 @@
             "slug": "migracijni-poslugi",
             "image": "service_images/3.png",
             "price": "0.00",
-            "description": ""
+            "description": "",
+            "service_type": "service"
         }
     },
     {
@@ -29,7 +31,8 @@
             "slug": "civilna-praktika",
             "image": "service_images/4.png",
             "price": "0.00",
-            "description": ""
+            "description": "",
+            "service_type": "service"
         }
     },
     {
@@ -40,7 +43,8 @@
             "slug": "intelektualna-vlasnist",
             "image": "service_images/5.png",
             "price": "0.00",
-            "description": ""
+            "description": "",
+            "service_type": "service"
         }
     },
     {
@@ -51,7 +55,8 @@
             "slug": "podatkova-praktika",
             "image": "service_images/6.png",
             "price": "0.00",
-            "description": ""
+            "description": "",
+            "service_type": "service"
         }
     },
     {
@@ -62,7 +67,8 @@
             "slug": "vijskove-pravo",
             "image": "service_images/7.png",
             "price": "0.00",
-            "description": ""
+            "description": "",
+            "service_type": "service"
         }
     },
     {
@@ -73,18 +79,8 @@
             "slug": "advokat-dlya-biznesu",
             "image": "service_images/8.png",
             "price": "0.00",
-            "description": ""
-        }
-    },
-    {
-        "model": "services.service",
-        "pk": 8,
-        "fields": {
-            "title": "Трудове право",
-            "slug": "trudove-pravo",
-            "image": "service_images/9.png",
-            "price": "0.00",
-            "description": ""
+            "description": "",
+            "service_type": "service"
         }
     },
     {
@@ -95,7 +91,56 @@
             "slug": "administrativna-praktika",
             "image": "service_images/2.png",
             "price": "0.00",
-            "description": ""
+            "description": "",
+            "service_type": "service"
+        }
+    },
+    {
+        "model": "services.service",
+        "pk": 10,
+        "fields": {
+            "title": "Трудове право",
+            "slug": "trudove-pravo",
+            "image": "service_images/9.png",
+            "price": "0.00",
+            "description": "",
+            "service_type": "service"
+        }
+    },
+    {
+        "model": "services.service",
+        "pk": 11,
+        "fields": {
+            "title": "Все про мобілізацію у воєнний час",
+            "slug": "vse-pro-mobilizaciyu-u-voyennij-chas",
+            "image": "service_images/12.png",
+            "price": "3000.00",
+            "description": "У період воєнного стану питання мобілізації стають особливо актуальними для багатьох громадян України. Якщо ви отримали повістку, маєте сумніви щодо законності дій військкомату, або просто хочете зрозуміти свої права та обов’язки, адвокат Ольга Бардадим готова допомогти вам розібратися у всіх нюансах цього процесу. Ця консультація створена, щоб надати вам повне уявлення про мобілізацію та забезпечити юридичну підтримку у складних ситуаціях.",
+            "service_type": "consultation"
+        }
+    },
+    {
+        "model": "services.service",
+        "pk": 12,
+        "fields": {
+            "title": "Сімейні справи",
+            "slug": "simejni-spravi",
+            "image": "service_images/10.png",
+            "price": "2000.00",
+            "description": "",
+            "service_type": "consultation"
+        }
+    },
+    {
+        "model": "services.service",
+        "pk": 13,
+        "fields": {
+            "title": "Житлові суперечки",
+            "slug": "zhitlovi-superechki",
+            "image": "service_images/11.png",
+            "price": "4000.00",
+            "description": "",
+            "service_type": "consultation"
         }
     }
 ]

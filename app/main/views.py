@@ -2,47 +2,38 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from services.models import Service
+from main.models import Review
 
 # Create your views here.
 def index(request):
 
-    services = Service.objects.only('title', 'slug', 'image')
+    services = Service.objects.filter(service_type='service').only('title', 'slug', 'image')
+    consultations = Service.objects.filter(service_type='consultation').only('title', 'slug', 'image')
+    rewiews = Review.objects.all()
 
     context = {
         'services': services,
 
-        'consultations': [
-            {
-                'title': 'Сімейні справи',
-                'image': 'user_image/10.png',
-            },
-            {
-                'title': 'Житлові суперечки',
-                'image': 'user_image/11.png',
-            },
-            {
-                'title': 'Мобілізація у воєнний час',
-                'image': 'user_image/12.png',
-            },
-        ],
+        'consultations': consultations,
 
-        'reviews': [
-            {
-                'name': 'Ірина Коваленко',
-                'stars': 4.3,
-                'text': 'Ольга Бардадим – справжній професіонал своєї справи! Допомогла мені у складній справі з спадщиною, усе пояснила доступно і оперативно вирішила питання. Рекомендую всім, хто шукає надійного адвоката!',
-            },
-            {
-                'name': 'Олег Петренко',
-                'stars': 5,
-                'text': 'Дуже вдячний пані Ользі за її підтримку у судовій справі. Завдяки її знанням і впевненості ми виграли справу, хоча шанси здавалися мінімальними. 5 зірок без сумнівів!',
-            },
-            {
-                'name': 'Марія Сидорчук',
-                'stars': 3.6,
-                'text': 'Звернулася до Ольги Бардадим з питанням щодо розірвання договору. Усе було зроблено якісно, хоча процес трохи затягнувся через судові нюанси. Загалом задоволена результатом.',
-            },
-        ],
+        'reviews': rewiews,
+        # [
+        #     {
+        #         'name': 'Ірина Коваленко',
+        #         'stars': 4.3,
+        #         'text': 'Ольга Бардадим – справжній професіонал своєї справи! Допомогла мені у складній справі з спадщиною, усе пояснила доступно і оперативно вирішила питання. Рекомендую всім, хто шукає надійного адвоката!',
+        #     },
+        #     {
+        #         'name': 'Олег Петренко',
+        #         'stars': 5,
+        #         'text': 'Дуже вдячний пані Ользі за її підтримку у судовій справі. Завдяки її знанням і впевненості ми виграли справу, хоча шанси здавалися мінімальними. 5 зірок без сумнівів!',
+        #     },
+        #     {
+        #         'name': 'Марія Сидорчук',
+        #         'stars': 3.6,
+        #         'text': 'Звернулася до Ольги Бардадим з питанням щодо розірвання договору. Усе було зроблено якісно, хоча процес трохи затягнувся через судові нюанси. Загалом задоволена результатом.',
+        #     },
+        # ],
     }
     return render(request, 'main/index.html', context)
 

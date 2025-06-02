@@ -231,7 +231,6 @@
 
 .consultation, .service {
     max-width: 355px;
-    max-height: 434px;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 4px 4px 22px 0 rgba(0, 0, 0, 0.25);
@@ -251,16 +250,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: 0 0 12px 12px;
     padding: 35px 31px;
     background: #2c2c2c;
 }
 
-.consultation-container-title h1, .service-container-title h1 {
+.consultation-title, .service-title {
     font-weight: 700;
     font-size: 16px;
     text-transform: uppercase;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.5s ease;
 }
 
 /* Section reviews */
@@ -537,6 +540,13 @@
     .service:hover, .consultation:hover {
         transform: scale(1.1);
         filter: brightness(1.2);
+    }
+
+    .service:hover .service-title, 
+    .consultation:hover .consultation-title{
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
     }
 }
 
