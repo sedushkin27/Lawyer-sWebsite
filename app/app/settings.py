@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     'main',
     'services',
-    # 'consultations',
+    'appointments',
 ]
 
 MIDDLEWARE = [

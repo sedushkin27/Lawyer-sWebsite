@@ -38,7 +38,7 @@
                     <p class="text-service">{{ service.description }}</p>
                     <div class="container-buttons">
                         <button id="call_us_in_service" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button>
-                        <button type="button" class="button-sing-up-for-consultation">Замовити послугу</button>
+                        <a href="{% url "appointments:index" slug=service.slug %}" type="button" class="button-sing-up-for-consultation">Замовити послугу</a>
                     </div>
                     {% if service.sections.all %}
                         <div class="that-you-get">

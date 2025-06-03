@@ -33,7 +33,7 @@
                         <h1 class="title">{{ consultation.title }}</h1>
                         <h2 class="price">Приблизна ціна: {{ consultation.price }}</h2>
                         <div class="container-buttons">
-                            <a href="/registration-form-consultation.html" class="button button-sing-up-for-consultation">Записатися на цю консультацию</a>
+                            <a href="{% url "appointments:index" slug=consultation.slug %}" class="button button-sing-up-for-consultation">Записатися на цю консультацию</a>
                             <button id="call_us_in_consultation" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button>
                         </div>
                     </div>
