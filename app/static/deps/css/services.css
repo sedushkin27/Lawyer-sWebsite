@@ -80,7 +80,7 @@
     text-align: center;
 }
 
-.title-count-text-about-service {
+.title-price-text-about-service {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -89,7 +89,7 @@
     max-width: 743px;
 }
 
-.title-and-count {
+.title-and-price {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -104,7 +104,7 @@
     text-transform: uppercase;
 }
 
-.count-service {
+.price-service {
     font-weight: 400;
     font-size: 20px;
     line-height: 1.5;

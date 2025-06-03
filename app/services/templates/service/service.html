@@ -30,31 +30,33 @@
                         {% endfor %}
                     </ul>
                 </div>
-                <div class="title-count-text-about-service">
-                    <div class="title-and-count">
+                <div class="title-price-text-about-service">
+                    <div class="title-and-price">
                         <h1 class="title-service">{{ service.title }}</h1>
-                        <h2 class="count-service">Приблизна ціна: {{ service.price }} грн</h2>
+                        <h2 class="price-service">Приблизна ціна: {{ service.price }} грн</h2>
                     </div>
                     <p class="text-service">{{ service.description }}</p>
                     <div class="container-buttons">
                         <button id="call_us_in_service" class="button-call-us" title="Зв'язатися з нами">Зв’язатися з нами</button>
                         <button type="button" class="button-sing-up-for-consultation">Замовити послугу</button>
                     </div>
-                    <div class="that-you-get">
-                        <h2>Що ви отримаєте:</h2>
-                        <ul class="list-that-you-get">
-                            {% for section in service.sections.all  %}
-                                <li class="element-list-that-you-get">
-                                    <h3 class="list-title">{{ section.title }}</h3>
-                                    <ul class="list-in-list-that-you-get">
-                                        {% for item in section.items.all %}
-                                            <li>{{ item.text }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                    {% if service.sections.all %}
+                        <div class="that-you-get">
+                            <h2>Що ви отримаєте:</h2>
+                            <ul class="list-that-you-get">
+                                {% for section in service.sections.all  %}
+                                    <li class="element-list-that-you-get">
+                                        <h3 class="list-title">{{ section.title }}</h3>
+                                        <ul class="list-in-list-that-you-get">
+                                            {% for item in section.items.all %}
+                                                <li>{{ item.text }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

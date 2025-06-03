@@ -8,7 +8,7 @@ def services(request, slug):
     service = get_object_or_404(Service.objects.prefetch_related(
         Prefetch('sections__items')  # Получить секции и вложенные пункты
     ), slug=slug)
-    another_services = Service.objects.exclude(pk=service.pk).only('title', 'slug')
+    another_services = Service.objects.filter(service_type='service').exclude(pk=service.pk).only('title', 'slug')
     context = {
         'service': service,
         'another_services': another_services,
@@ -19,9 +19,9 @@ def consultation(request, slug):
     consultation = get_object_or_404(Service.objects.prefetch_related(
         Prefetch('sections__items')  # Получить секции и вложенные пункты
     ), slug=slug)
-    another_consultation = Service.objects.exclude(pk=consultation.pk).only('title', 'slug', 'image')
+    another_consultation = Service.objects.filter(service_type='consultation').exclude(pk=consultation.pk).only('title', 'slug', 'image')
     context = {
         'consultation': consultation,
         'another_consultation': another_consultation,
     }
-    return render(request, 'service/consultation.thml', context) 
+    return render(request, 'service/consultation.html', context) 
