@@ -169,6 +169,13 @@
     transition: all 1s ease;
 }
 
+.container-information h2 {
+    font-family: "Playfair Display", sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    text-transform: uppercase;
+}
+
 /* Section advantages */
 .advantages {
     display: flex;
