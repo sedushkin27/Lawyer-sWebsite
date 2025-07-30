@@ -9,19 +9,8 @@ function initCalendar() {
 
   if (!containerCalendar || !containerInputInfo || !datetimeInput) return;
 
-  const availableDates = [
-    new Date(2025, 3, 1),
-    new Date(2025, 3, 5),
-    new Date(2025, 5, 10),
-    new Date(2025, 5, 15)
-  ];
-
-  const availableTimes = {
-    "2025-04-01": ["11:20", "12:30"],
-    "2025-04-05": ["14:00", "15:30"],
-    "2025-06-10": ["09:00", "10:30"],
-    "2025-06-15": ["13:00", "16:00"]
-  };
+  const availableDates = JSON.parse(document.getElementById('available-dates').textContent).map(date => new Date(date));
+  const availableTimes = JSON.parse(document.getElementById('available-times').textContent);
 
   const minDate = new Date(Math.min(...availableDates.map(d => d.getTime())));
   const maxDate = new Date(Math.max(...availableDates.map(d => d.getTime())));

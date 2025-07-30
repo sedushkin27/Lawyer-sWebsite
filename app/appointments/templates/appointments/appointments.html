@@ -67,5 +67,7 @@
 {% endblock content %}
 
 {% block js %}
+    <script id="available-dates" type="application/json">{{ available_dates|safe }}</script>
+    <script id="available-times" type="application/json">{{ available_times|safe }}</script>
     <script src="{% static "deps/js/registration_form_service.js" %}"></script>
 {% endblock js %}
