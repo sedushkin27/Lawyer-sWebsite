@@ -10,7 +10,7 @@
     justify-content: flex-start;
     gap: 15px;
     padding: 100px 20px 0 20px;
-    width: 50%;
+    width: 45%;
     background-image: url(../image/background_registration_form.png);
     background-repeat: no-repeat;
     background-size: cover; 
@@ -26,6 +26,11 @@
     border-radius: 5px;
     padding: 10px 20px;
 }
+
+.go-back:hover {
+    background: #242AA9;
+}
+
 
 .title-service-or-consultation {
     font-weight: 400;
@@ -52,6 +57,10 @@
     align-items: center;
     justify-content: center;
     padding: 100px 20px 0 20px;
+}
+
+.container-registration-form a {
+    color: rgb(0, 110, 255);
 }
 
 .registration-form {
@@ -108,25 +117,25 @@
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
     margin-bottom: 10px;
-    gap: 20px;
+    gap: 31px;
 }
 
 .days-of-week span {
-    font-size: 16px;
+    font-size: 19px;
     color: #fff;
 }
 
 .days-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+    gap: 10px;
 }
 
 .day {
     padding: 10px;
     text-align: center;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 24px;
     cursor: default;
 }
 
@@ -167,13 +176,13 @@
 }
 
 .time-button {
-    padding: 10px 20px;
+    padding: 22px 10px;
     background: #242AA9;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .time-button:hover {
@@ -227,4 +236,47 @@
     border-radius: 5px;
     padding: 15px 15px;
     background: #272eb7;
+}
+
+@media screen and (max-width: 1000px) {
+    .days-of-week {
+        gap: 20px;
+    }
+
+    .days-of-week span {
+        font-size: 16px;
+    }
+
+    .days-container {
+        gap: 5px;
+    }
+
+    .day {
+        font-size: 16px;
+    }
+
+    .time-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .registration {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .container-about-service-or-consultation,
+    .container-registration-form {
+        width: 100%;
+    }
+
+    .container-about-service-or-consultation {
+        padding: 100px 0 10px 0px;
+    }
+
+    .container-registration-form {
+        padding: 20px 0 20px 0;
+    }
 }
