@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  initCalendar()
+  initCalendar();
+  phoneInput();
+  characterCounter();
+  validateForm();
 });
 
 function initCalendar() {
@@ -130,6 +133,85 @@ function initCalendar() {
   };
 
   generateCalendar();
+}
+
+function phoneInput() {
+  const telInput = document.getElementById('userstel');
+  if (!telInput) return;
+  telInput.addEventListener('input', () => {
+    let value = telInput.value.replace(/\D/g, '');
+    if (value.length > 9) value = value.slice(0, 9);
+
+    let formattedValue = '';
+    if (value.length > 0) formattedValue += value.slice(0, 2);
+    if (value.length > 2) formattedValue += '-' + value.slice(2, 5);
+    if (value.length > 5) formattedValue += '-' + value.slice(5, 7);
+    if (value.length > 7) formattedValue += '-' + value.slice(7, 9);
+
+    telInput.value = formattedValue;
+    telInput.classList.toggle('invalid', value.length !== 9);
+  });
+}
+
+function characterCounter() {
+  const commentInput = document.querySelector('.input-comment');
+  const counter = document.querySelector('.character-counter');
+
+  if (!commentInput || !counter) return;
+
+  commentInput.addEventListener('input', () => {
+    const length = commentInput.value.length;
+    counter.textContent = `${length}/3000`;
+    if (length < 3000) {
+      counter.classList.remove('full');
+    }
+    if (length >= 3000) {
+      commentInput.value = commentInput.value.slice(0, 3000);
+      counter.textContent = '3000/3000';
+      counter.classList.add('full');
+    }
+  });
+};
+
+function validateForm() {
+  const form = document.querySelector('.registration-form');
+  const errorContainer = document.querySelector('.container-error');
+  const errorTitle = errorContainer.querySelector('.error-message h4');
+  const errorText = errorContainer.querySelector('.error-message p');
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const surname = document.getElementById('surname').value.trim();
+    const tel = document.getElementById('userstel').value.replace(/\D/g, '');
+    const email = document.getElementById('email').value.trim();
+
+    errorContainer.classList.add('hidden');
+
+    if (!name || !surname || !tel) {
+      showError('Помилка заповнення форми', 'Будь ласка, заповніть всі обов\'язкові поля. Такі як ім\'я, прізвище, телефон.');
+      return;
+    } else if (name.length <= 2 || surname.length <= 2) {
+      showError('Помилка заповнення форми', 'Ім\'я та прізвище повинні містити не менше 2 символів.');
+      return;
+    } else if ( email != null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('Помилка заповнення форми', 'Будь ласка, введіть коректну електронну адресу.');
+      return;
+    } else if (tel.length < 9 || !/^\d+$/.test(tel)) {
+      showError('Помилка заповнення форми', 'Будь ласка, введіть коректний номер телефону (не менше 10 цифр).');
+      return;
+    };
+
+    document.getElementById('userstel').value = tel;
+    
+    form.submit();
+  })
+
+  function showError(title, text) {
+    errorTitle.textContent = title;
+    errorText.textContent = text;
+    errorContainer.classList.remove('hidden');
+  }
 }
 
 const header = document.querySelector('header');

@@ -22,7 +22,14 @@
             <p class="about-service-or-consultatio">{{ service.description }}</p>
         </div>
         <div class="container-registration-form">
-            <form class="registration-form" action="">
+            <form class="registration-form" method="POST" action="{% url 'appointments:index' service.slug %}">
+                <div class="container-error hidden">
+                    <div class="error-message">
+                        <h4>Name error</h4>
+                        <p>About error</p>
+                    </div>
+                </div>
+                {% csrf_token %}
                 <div class="container-calendar">
                     <h2>Оберіть дату та час консультації</h2>
                 </div>
@@ -32,11 +39,11 @@
                     <div class="table-input">
                         <div class="container-input">
                             <h3>Ваше Ім'я *</h3>
-                            <input class="input-in-form-registration" placeholder="Введіть ваше ім'я" type="text" name="name" id="name">
+                            <input class="input-in-form-registration" placeholder="Введіть ваше ім'я" type="text" name="name" id="name" required>
                         </div>
                         <div class="container-input">
                             <h3>Ваше Призвіще *</h3>
-                            <input class="input-in-form-registration" placeholder="Введіть ваше прізвище" type="text" name="surname" id="surname">
+                            <input class="input-in-form-registration" placeholder="Введіть ваше прізвище" type="text" name="surname" id="surname" required>
                         </div>
                         <div class="container-input">
                             <h3>Телефон *</h3>
@@ -45,17 +52,18 @@
                                     <img src="{% static "deps/svg/flag_ua.svg" %}" alt="Відправити">
                                     <p>+380</p>
                                 </div>
-                                <input type="tel" name="users-tel" id="users-tel" placeholder="XX-XXX-XX-XX" maxlength="12">
+                                <input type="tel" name="userstel" id="userstel" placeholder="XX-XXX-XX-XX" maxlength="12" required>
                                 <!-- <button id="enter-tel" name="enter-tel" type="submit" class="buttton-enter-tel"><svg width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5V10.5ZM35.0607 13.0607C35.6464 12.4749 35.6464 11.5251 35.0607 10.9393L25.5147 1.3934C24.9289 0.807612 23.9792 0.807612 23.3934 1.3934C22.8076 1.97918 22.8076 2.92893 23.3934 3.51472L31.8787 12L23.3934 20.4853C22.8076 21.0711 22.8076 22.0208 23.3934 22.6066C23.9792 23.1924 24.9289 23.1924 25.5147 22.6066L35.0607 13.0607ZM2 13.5H34V10.5H2V13.5Z" fill="white" /></svg></button> -->
                             </div>
                         </div>
                         <div class="container-input">
-                            <h3>Електрона пошта *</h3>
+                            <h3>Електрона пошта</h3>
                             <input class="input-in-form-registration" placeholder="Введіть вашу електрону пошту" type="email" name="email" id="email">
                         </div>
                         <div class="container-input comment">
                             <h3>Коментар</h3>
-                            <textarea class="input-in-form-registration input-comment" placeholder="Введіть ваш коментар до заяви" type="text" name="coment" id="coment"></textarea>
+                            <p class="character-counter">0/3000</p>
+                            <textarea class="input-in-form-registration input-comment" placeholder="Введіть ваш коментар до заяви" type="text" name="comment" id="comment" maxlength="3000"></textarea>
                         </div>
                         <button class="button-submit" type="submit">Замовити</button>
                     </div>

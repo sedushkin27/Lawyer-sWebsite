@@ -212,8 +212,6 @@ function initCallUsForm() {
         return;
       }
 
-      const phoneNumber = '+380' + rawValue;
-      console.log('Отправляемый номер:', phoneNumber);
       // form.submit();
     });
   }
