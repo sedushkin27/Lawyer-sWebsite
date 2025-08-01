@@ -194,7 +194,7 @@ function validateForm() {
     } else if (name.length <= 2 || surname.length <= 2) {
       showError('Помилка заповнення форми', 'Ім\'я та прізвище повинні містити не менше 2 символів.');
       return;
-    } else if ( email != null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    } else if (email != '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       showError('Помилка заповнення форми', 'Будь ласка, введіть коректну електронну адресу.');
       return;
     } else if (tel.length < 9 || !/^\d+$/.test(tel)) {
