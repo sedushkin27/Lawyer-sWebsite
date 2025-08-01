@@ -401,6 +401,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transition: all all 1s ease-in-out;
 }
 
 .button-review-left:hover, .button-review-right:hover {

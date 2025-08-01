@@ -36,6 +36,11 @@
     height: 100%;
 }
 
+.consultation:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
 .consultation-image{
     width: 100%;
 }
