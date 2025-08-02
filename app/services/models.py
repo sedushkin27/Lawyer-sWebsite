@@ -26,7 +26,7 @@ class Service(models.Model):
         verbose_name_plural = ("Послуги")
 
     def __str__(self):
-        return self.title
+        return f"{self.get_service_type_display()}: {self.title}"
 
     # def get_absolute_url(self):
     #     return reverse("Services_detail", kwargs={"pk": self.slug})

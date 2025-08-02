@@ -56,9 +56,9 @@ class Appointment(models.Model):
 
     name = models.CharField(("Ім'я"), max_length=50)
     surname = models.CharField(("Призвіще"), max_length=50)
-    phone = models.CharField(validators=[phone_validator], max_length=13)
-    email = models.EmailField(("Електронна пошта"), max_length=254)
-    comment = models.TextField(("Коментар"))
+    phone = models.CharField(("Телефон"), validators=[phone_validator], max_length=13)
+    email = models.EmailField(("Електронна пошта"), max_length=254, null=True, blank=True)
+    comment = models.TextField(("Коментар"), null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=("Дата створення"))
     order_service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name=("Замовлена послуга або консультіция"), related_name='appointments')
     reserved_time = models.OneToOneField(AppointmentTime, on_delete=models.CASCADE, verbose_name=("Зарезервований час"), related_name='appointment')
