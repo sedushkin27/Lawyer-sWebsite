@@ -117,6 +117,7 @@ LANGUAGE_CODE = 'uk'
 TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
+USE_L10N = True
 
 USE_TZ = True
 

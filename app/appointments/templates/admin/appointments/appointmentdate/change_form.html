@@ -1,0 +1,51 @@
+{% extends "admin/change_form.html" %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+{% if show_dynamic_fields %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const modeRadios = document.querySelectorAll('input[name="mode"]');
+    const singleDateField = document.getElementById('id_single_date').closest('.form-row');
+    const startDateField = document.getElementById('id_start_date').closest('.form-row');
+    const endDateField = document.getElementById('id_end_date').closest('.form-row');
+    const weekendDaysField = document.getElementById('id_weekend_days').closest('.form-row');
+    const specificWeekendDaysField = document.getElementById('id_specific_weekend_days').closest('.form-row');
+
+    function toggleFields() {
+        const mode = document.querySelector('input[name="mode"]:checked').value;
+        if (mode === 'single') {
+            singleDateField.style.display = 'block';
+            startDateField.style.display = 'none';
+            endDateField.style.display = 'none';
+            weekendDaysField.style.display = 'none';
+            specificWeekendDaysField.style.display = 'none';
+            document.getElementById('id_start_date').required = false;
+            document.getElementById('id_end_date').required = false;
+            document.getElementById('id_weekend_days').required = false;
+            document.getElementById('id_specific_weekend_days').required = false;
+            document.getElementById('id_single_date').required = true;
+        } else {
+            singleDateField.style.display = 'none';
+            startDateField.style.display = 'block';
+            endDateField.style.display = 'block';
+            weekendDaysField.style.display = 'block';
+            specificWeekendDaysField.style.display = 'block';
+            document.getElementById('id_start_date').required = true;
+            document.getElementById('id_end_date').required = true;
+            document.getElementById('id_weekend_days').required = true;
+            document.getElementById('id_specific_weekend_days').required = true;
+            document.getElementById('id_single_date').required = false;
+        }
+    }
+
+    modeRadios.forEach(radio => {
+        radio.addEventListener('change', toggleFields);
+    });
+
+    // Инициализация при загрузке
+    toggleFields();
+});
+</script>
+{% endif %}
+{% endblock %}

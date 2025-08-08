@@ -1,20 +1,39 @@
 from django.contrib import admin
 from django import forms
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from datetime import datetime, timedelta, date
 from appointments.models import AppointmentDate, AppointmentTime, Appointment
 
 class AppointmentDateForm(forms.ModelForm):
+    MODE_CHOICES = (
+        ('single', 'Одна дата'),
+        ('range', 'Діапазон дат'),
+    )
+    mode = forms.ChoiceField(
+        label="Режим створення",
+        choices=MODE_CHOICES,
+        widget=forms.RadioSelect,
+        initial='single'
+    )
+    single_date = forms.DateField(
+        label="Дата",
+        initial=date.today,
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False
+    )
     start_date = forms.DateField(
         label="Початкова дата",
         initial=date.today,
-        widget=forms.DateInput(attrs={'type': 'date'})
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False
     )
     end_date = forms.DateField(
         label="Кінцева дата",
         initial=date.today,
-        widget=forms.DateInput(attrs={'type': 'date'})
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False
     )
-
     weekend_days = forms.MultipleChoiceField(
         label="Вихідні дні",
         choices=[
@@ -63,6 +82,8 @@ class AppointmentDateForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+        mode = cleaned_data.get('mode')
+        single_date = cleaned_data.get('single_date')
         start_date = cleaned_data.get('start_date')
         end_date = cleaned_data.get('end_date')
         start_time = cleaned_data.get('start_time')
@@ -71,34 +92,42 @@ class AppointmentDateForm(forms.ModelForm):
         breaks = cleaned_data.get('breaks')
         interval_minutes = cleaned_data.get('interval_minutes')
 
-        # Валидация дат
-        if start_date and end_date:
+        if interval_minutes and interval_minutes < 5:
+            raise forms.ValidationError("Інтервал має бути не менше 5 хвилин.")
+
+        if start_time and end_time:
+            if start_time >= end_time:
+                raise forms.ValidationError("Початковий час не може бути пізніше або дорівнювати кінцевому часу.")
+
+        if mode == 'single':
+            if not single_date:
+                raise forms.ValidationError("Для режиму 'Одна дата' необхідно вказати дату.")
+            if single_date < date.today():
+                raise forms.ValidationError("Дата не може бути в минулому.")
+            if AppointmentDate.objects.filter(date=single_date).exists():
+                raise forms.ValidationError("Ця дата вже існує.")
+        else:  # mode == 'range'
+            if not start_date or not end_date:
+                raise forms.ValidationError("Для режиму 'Діапазон дат' необхідно вказати початкову та кінцеву дати.")
             if start_date > end_date:
                 raise forms.ValidationError("Початкова дата не може бути пізніше кінцевої дати.")
             if start_date < date.today():
                 raise forms.ValidationError("Початкова дата не може бути в минулому.")
 
-        # Валидация времени
-        if start_time and end_time:
-            if start_time >= end_time:
-                raise forms.ValidationError("Початковий час не може бути пізніше або дорівнювати кінцевому часу.")
-
-        # Валидация интервала
-        if interval_minutes and interval_minutes < 5:
-            raise forms.ValidationError("Інтервал має бути не менше 5 хвилин.")
-
-        # Валидация конкретных выходных дат
         if specific_weekend_days:
             try:
                 specific_dates = [datetime.strptime(d.strip(), '%Y-%m-%d').date() for d in specific_weekend_days.split(',') if d.strip()]
-                if any(d < start_date or d > end_date for d in specific_dates):
-                    raise forms.ValidationError("Конкретні вихідні дні повинні бути в межах діапазону дат.")
+                if mode == 'single':
+                    if any(d == single_date for d in specific_dates):
+                        raise forms.ValidationError("Дата не може бути вказана як вихідний день.")
+                else:
+                    if any(d < start_date or d > end_date for d in specific_dates):
+                        raise forms.ValidationError("Конкретні вихідні дні повинні бути в межах діапазону дат.")
                 if any(d < date.today() for d in specific_dates):
                     raise forms.ValidationError("Конкретні вихідні дні не можуть бути в минулому.")
             except ValueError:
                 raise forms.ValidationError("Неправильний формат дат у конкретних вихідних днях. Використовуйте YYYY-MM-DD.")
 
-        # Валидация перерывов
         if breaks:
             try:
                 for break_range in breaks.split(','):
@@ -117,6 +146,8 @@ class AppointmentDateForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True):
+        mode = self.cleaned_data['mode']
+        single_date = self.cleaned_data['single_date']
         start_date = self.cleaned_data['start_date']
         end_date = self.cleaned_data['end_date']
         weekend_days = self.cleaned_data['weekend_days']
@@ -132,7 +163,6 @@ class AppointmentDateForm(forms.ModelForm):
             weekend_dates = {datetime.strptime(d.strip(), '%Y-%m-%d').date() for d in specific_weekend_days.split(',') if d.strip()}
         weekend_days = set(int(day) for day in weekend_days) if weekend_days else set()
 
-        # Парсим перерывы
         break_ranges = []
         if breaks:
             for break_range in breaks.split(','):
@@ -143,25 +173,23 @@ class AppointmentDateForm(forms.ModelForm):
                 end = datetime.strptime(end.strip(), '%H:%M').time()
                 break_ranges.append((start, end))
 
-        # Создаём даты и временные слоты
         created_dates = []
-        current_date = start_date
-        while current_date <= end_date:
-            # Пропускаем выходные и существующие даты
+        if mode == 'single':
+            dates = [single_date]
+        else:
+            dates = [start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)]
+
+        for current_date in dates:
             if (str(current_date.weekday()) in weekend_days or 
                 current_date in weekend_dates or 
                 AppointmentDate.objects.filter(date=current_date).exists()):
-                current_date += timedelta(days=1)
-                print("Skipping date:", current_date)
                 continue
 
-            # Создаём объект AppointmentDate
             appointment_date = AppointmentDate(date=current_date)
-            print("Creating date:", appointment_date.date)
+            
             appointment_date.save()
             created_dates.append(appointment_date)
 
-            # Создаём временные слоты
             current_time = datetime.combine(current_date, start_time)
             end_datetime = datetime.combine(current_date, end_time)
             while current_time < end_datetime:
@@ -181,10 +209,12 @@ class AppointmentDateForm(forms.ModelForm):
                     appointment_time.save()
                 current_time += timedelta(minutes=interval_minutes)
 
-            current_date += timedelta(days=1)
-
-        # Возвращаем первый созданный объект AppointmentDate (или None, если ничего не создано)
         return created_dates[0] if created_dates else None
+
+class AppointmentTimeInline(admin.TabularInline):
+    model = AppointmentTime
+    extra = 0
+    fields = ['time', 'status']
 
 @admin.register(AppointmentDate)
 class AppointmentDateAdmin(admin.ModelAdmin):
@@ -194,15 +224,24 @@ class AppointmentDateAdmin(admin.ModelAdmin):
     date_hierarchy = 'date'
 
     def get_form(self, request, obj=None, **kwargs):
-        if obj is None: 
+        if obj is None:  
             kwargs['form'] = AppointmentDateForm
-        else:
+        else: 
             kwargs['form'] = super().get_form(request, obj, **kwargs)
+            self.inlines = [AppointmentTimeInline]
         return super().get_form(request, obj, **kwargs)
 
     def save_related(self, request, form, formsets, change):
         if not isinstance(form, AppointmentDateForm):
             super().save_related(request, form, formsets, change)
+
+    def get_changeform_initial_data(self, request):
+        return {'mode': 'single'}
+
+    def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['show_dynamic_fields'] = True
+        return super().changeform_view(request, object_id, form_url, extra_context)
 
     def available_times_count(self, obj):
         return obj.appointment_times.filter(status=AppointmentTime.NOT_RESERVED).count()
@@ -210,8 +249,22 @@ class AppointmentDateAdmin(admin.ModelAdmin):
 
 @admin.register(AppointmentTime)
 class AppointmentTimeAdmin(admin.ModelAdmin):
-    list_display = ['time', 'date', 'status']
-    list_filter = ['time', 'date', 'status']
+    list_display = ['time', 'date', 'month', 'day', 'status']
+    list_filter = ['date', 'status'] 
+    search_fields = ['date__date', 'time']
+    ordering = ['date__date', 'time']
+
+    def month(self, obj):
+        """Отображает месяц из связанной даты."""
+        return obj.date.date.strftime('%B') if obj.date else '-'
+    month.short_description = 'Місяць'
+    month.admin_order_field = 'date__date' 
+
+    def day(self, obj):
+        """Отображает день из связанной даты."""
+        return obj.date.date.day if obj.date else '-'
+    day.short_description = 'День'
+    day.admin_order_field = 'date__date' 
 
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):

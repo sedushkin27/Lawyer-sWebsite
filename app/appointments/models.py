@@ -95,6 +95,10 @@ def delete_appointment_on_time_delete(sender, instance, **kwargs):
     if hasattr(instance, 'appointment') and instance.appointment:
         instance.appointment.delete()
 
-    appointment_date = instance.date
-    if not appointment_date.appointment_times.exists():
-        appointment_date.delete()
+    try:
+        appointment_date = instance.date
+        
+        if not appointment_date.appointment_times.exists():
+            appointment_date.delete()
+    except AppointmentDate.DoesNotExist:
+        pass
