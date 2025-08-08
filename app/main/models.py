@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -28,3 +29,17 @@ class Review(models.Model):
 
     # def get_absolute_url(self):
     #     return reverse("review_detail", kwargs={"pk": self.pk})
+
+class PrivacyPolicy(models.Model):
+    title = models.CharField("Название", max_length=255, default="Політика конфіденційності")
+    content = RichTextField("Содержимое", blank=True, null=True)
+    file = models.FileField("Файл (.docx или .txt)", upload_to="privacy_policies/", blank=True, null=True)
+    updated_at = models.DateTimeField("Дата обновления", auto_now=True)
+
+    class Meta:
+        db_table = "privacy_policy"
+        verbose_name = "политику конфиденциальности"
+        verbose_name_plural = "Политики конфиденциальности"
+
+    def __str__(self):
+        return self.title

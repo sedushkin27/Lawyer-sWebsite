@@ -12,25 +12,13 @@
 {% block content %}
     <section class="section-policy">
         <div class="container-global container-policy">
-            <h1>Політика конфіденційності</h1>
-            <p>{{ about_policy }}</p>
-            {% for element in elements_policy %}
-                <div class="element-policy">
-                    <h2>{{element.title}}</h2>
-                    <p>{{element.first_text}}</p>
-                    {% if element.list|length > 0 %}
-                        <ul>
-                            {% for i in element.list %}
-                                <li>{{ i }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                    {% if element.second_text %}
-                        <p>{{ element.second_text }}</p>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            <p>{{ date_updated }}</p>
+            {% if policy %}
+                <h1>{{ policy.title }}</h1>
+                {{ policy.content|safe }}
+                <p>Останнє оновлення: {{ policy.updated_at|date:"d.m.Y" }}</p>
+            {% else %}
+                <p>Політика конфіденційності не знайдена.</p>
+            {% endif %}
         </div>
     </section>
 {% endblock content %}

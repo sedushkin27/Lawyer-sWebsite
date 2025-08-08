@@ -6,6 +6,10 @@
     padding-bottom: 50px;
 }
 
+.container-policy a {
+    text-decoration:underline;
+}
+
 .container-policy {
     flex-direction: column;
     gap: 25px;
