@@ -1,11 +1,12 @@
 from django.urls import path
 
-from main.views import index, about, conditioning_policy
+from main.views import index, about, conditioning_policy, public_offer
 
 app_name = 'main'
 
 urlpatterns = [
     path('', index, name='index'),
     path('about-me/', about, name='about'),
-    path('conditioning-policy/', conditioning_policy, name='conditioning_policy')
+    path('conditioning-policy/', conditioning_policy, name='conditioning_policy'),
+    path('public-offer/', public_offer, name='public_offer'),
 ]

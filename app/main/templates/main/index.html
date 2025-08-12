@@ -1,8 +1,9 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load service_tags %}
 
 {% block title %}
-    <title>Адвокат Ольга Бардадим</title>
+    <title>Адвокат {{ about_me.name }} {% if about_me.sername %}{{about_me.sername}}{% endif %}</title>
 {% endblock title %}
 
 {% block css %}
@@ -14,56 +15,64 @@
         <div class="home-container">
             <h1>Професійна юридична допомога у складних та індивідуальних справах.</h1>
             <h2>Ми забезпечимо надійний правовий захист і знайдемо найкраще рішення для вас.</h2>
-            <a href="/consultation.html" class="button button-sing-up-for-consultation button-link" title="Обрати консультацію">Обрати консультацію</a>
+            {% first_slug_consultation as first_consultation %}
+            {% if first_consultation %}
+            <a href="{% url "services:consultation" slug=first_consultation.slug %}" class="button button-sing-up-for-consultation button-link" title="Обрати консультацію">Обрати консультацію</a>    
+            {% endif %}
             <p>Отримаєте кваліфіковану допомогу вже сьогодні!</p>
         </div>
     </section>
+    {% if about_me %}
     <section class="section-about-me">
         <div class="container-about-me">
             <div class="container-text-about-me">
                 <div class="container-name-lawyer">
                     <h2>Адвокат</h2>
-                    <h1>Ольга Бардадим</h1>
+                    <h1>{{ about_me.name }} {% if about_me.sername %}{{about_me.sername}}{% endif %}</h1>
                 </div>
                 <div class="container-text">
-                    <p>Мене звати Ольга Бардадим і я юрист з більш ніж 15-річним досвідом роботи в галузі права. Моя спеціалізація охоплює широкий спектр юридичних послуг, включаючи сімейне право, кримінальний захист, а також вирішення майнових спорів.</p>
-                    <p>Моя головна мета - захистити ваші інтереси і забезпечити справедливість у всіх юридичних питаннях. У своїй практиці я можу розраховувати на глибоке знання законодавства та індивідуальний підхід до кожного випадку. Кожен мій клієнт може розраховувати на ретельне лікування, ретельний аналіз ситуації і розробку найбільш ефективної стратегії захисту.</p>
+                    {{ about_me.main_about_me_text|safe }}
                 </div>
             </div>
-            <img class="image-about-me" src="{% static "deps/image/image_about_me.png" %}" alt="">
+            {% if about_me.first_photo %}
+            <img class="image-about-me" src="{{ about_me.second_photo.url }}" alt="">
+            {% endif %}
         </div>
         <ul class="information">
+            {% if about_me.years_of_experience %}
             <li class="container-information">
-                <h2>21</h2>
+                <h2>{{ about_me.years_of_experience }}</h2>
                 <p>Років досвіду</p>
             </li>
+            {% endif %}
+            {% if about_me.winning_cases_count %}
             <li class="container-information">
-                <h2>90%</h2>
+                <h2>{{ about_me.winning_cases_count }}</h2>
                 <p>Виграних справ</p>
             </li>
+            {% endif %}
+            {% if about_me.client_count %}
             <li class="container-information">
-                <h2>300</h2>
+                <h2>{{ about_me.client_count }}</h2>
                 <p>Клієнтів</p>
             </li>
+            {% endif %}
         </ul>
     </section>
+    {% endif %}
+    {% if advantages_working_with_me %}
     <section class="advantages">
         <h2 class="title-section">Переваги роботи зі мною</h2>
         <div class="container-global container-advantages">
+            {% for advantage in advantages_working_with_me %}
             <div class="advantage">
-                <h3 class="title-advantage">Досвід та компетентність</h3>
-                <p class="text-advantage">Маю більш ніж 15-річний досвід роботи у різних галузях права, я маю глибокі знання та навички, необхідні для вирішення найскладніших юридичних проблем. Моя практика підтверджена десятками успішно завершених справ та задоволених клієнтів.</p>
+                <h3 class="title-advantage">{{ advantage.title }}</h3>
+                <p class="text-advantage">{{ advantage.text }}</p>
             </div>
-            <div class="advantage">
-                <h3 class="title-advantage">Індивідуальний підхід</h3>
-                <p class="text-advantage">Кожен випадок унікальний, і я завжди уважно вивчаю всі деталі, щоб розробити найбільш ефективну стратегію захисту. Ви можете розраховувати на персоналізований сервіс з урахуванням ваших потреб і побажань.</p>
-            </div>
-            <div class="advantage">
-                <h3 class="title-advantage">Відповідальність, чесність</h3>
-                <p class="text-advantage">Я беру на себе відповідальність за кожну справу, яку беру до виконання, і завжди дію в інтересах клієнта, дотримуючись високих стандартів професійної етики. Ви можете бути впевнені в моєму професіоналізмі та чесності.</p>
-            </div>
+            {% endfor %}
         </div>
     </section>
+    {% endif %}
     {% if services %}
         <section class="services">
             <h1 class="title-section">Послуги</h1>
@@ -144,29 +153,49 @@
         <div class="container-global container-map-and-contacts">
             <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1768.3812444188761!2d34.65500623682807!3d47.64328877123732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dc972b20be3613%3A0xc8d312a93accbcbd!2z0J_QsNGA0LrQvtCy0LDRjyDRg9C7LiwgOSwg0JzQsNGA0LPQsNC90LXRhiwg0JTQvdC10L_RgNC-0L_QtdGC0YDQvtCy0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDUzNDAw!5e0!3m2!1sru!2sua!4v1742379323755!5m2!1sru!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div class="container-contacts">
-                <img src="{% static "deps/image/image_in_contact.png" %} " alt="" class="author-image-in-contact">
+                {% if about_me.third_photo %}
+                <img src="{{ about_me.third_photo.url }}" alt="" class="author-image-in-contact">
+                {% endif %}
                 <div class="contacts">
-                    <h1 class="name-author-in-contact">Ольга Бардадим</h1>
+                    <h1 class="name-author-in-contact">{{ about_me.name }} {% if about_me.sername %}{{about_me.sername}}{% endif %}</h1>
+                    {% if about_me.phone or about_me.email or about_me.address %}
                     <div class="contact-and-address">
-                        <a href="tel:+380 81 123 4567" class="phone">Телефон: +380 81 123 4567</a>
-                        <a href="mailto:" class="email">Email: OlgaBardadym@example.com</a>
-                        <p class="address">Адреса: вул. Центральна, 123, Київ, Україна</p>
+                        {% if about_me.phone %}
+                        <a href="tel:{{ about_me.phone }}" class="phone">Телефон: {{ about_me.phone }}</a>
+                        {% endif %}
+                        {% if about_me.email %}
+                        <a href="mailto:{{ about_me.email }}" class="email">Email: {{ about_me.email }}</a>
+                        {% endif %}
+                        {% if about_me.address %}
+                        <p class="address">Адреса: {{ about_me.address }}</p>
+                        {% endif %}
                     </div>
+                    {% endif %}
+                    {% if about_me.viber or about_me.telegram or about_me.messenger or about_me.whatsapp %}
                     <h2>Наші мережи</h2>
                     <div class="container-messengers">
-                        <a href="#" class="messenger-link">
+                        {% if about_me.viber %}
+                        <a href="{{ about_me.viber }}" class="messenger-link">
                             <img src="{% static "deps/svg/viber.svg" %}" class="messenger-logo">
                         </a>
-                        <a href="#" class="messenger-link">
+                        {% endif %}
+                        {% if about_me.telegram %}
+                        <a href="{{ about_me.telegram }}" class="messenger-link">
                             <img src="{% static "deps/svg/telegram.svg" %}" class="messenger-logo">
                         </a>
-                        <a href="#" class="messenger-link">
+                        {% endif %}
+                        {% if about_me.messenger %}
+                        <a href="{{ about_me.messenger }}" class="messenger-link">
                             <img src="{% static "deps/svg/facebook_messengers.svg" %}" class="messenger-logo">
                         </a>
-                        <a href="#" class="messenger-link">
+                        {% endif %}
+                        {% if about_me.whatsapp %}
+                        <a href="{{ about_me.whatsapp }}" class="messenger-link">
                             <img src="{% static "deps/svg/whatsapp.svg" %}" class="messenger-logo">
                         </a>
+                        {% endif %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

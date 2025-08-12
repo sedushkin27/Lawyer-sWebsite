@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Політика конфіденційності</title>
+{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/legal_document.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <section class="section-legal-document">
+        <div class="container-global container-legal-document">
+            {% if legal_document %}
+                <h1>{{ legal_document.get_document_type_display }}</h1>
+                {{ legal_document.content|safe }}
+                <p>Останнє оновлення: {{ legal_document.updated_at|date:"d.m.Y" }}</p>
+            {% else %}
+                <h1>Документ не знайден</h1>
+                <p>На жаль, документ, який ви шукаєте, не існує або був видалений.</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

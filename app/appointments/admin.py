@@ -1,7 +1,5 @@
 from django.contrib import admin
 from django import forms
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 from datetime import datetime, timedelta, date
 from appointments.models import AppointmentDate, AppointmentTime, Appointment
 

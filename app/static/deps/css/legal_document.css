@@ -1,4 +1,4 @@
-.section-policy {
+.section-legal-document {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,36 +6,36 @@
     padding-bottom: 50px;
 }
 
-.container-policy a {
+.container-legal-document a {
     text-decoration:underline;
 }
 
-.container-policy {
+.container-legal-document {
     flex-direction: column;
     gap: 25px;
 }
 
-.element-policy {
+.element-legal-document {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.element-policy h2 {
+.element-legal-document h2 {
     font-size: 24px;
 }
 
-.element-policy ul {
+.element-legal-document ul {
     display: flex;
     flex-direction: column;
     gap: 13px;
 }
 
-.element-policy ul li {
+.element-legal-document ul li {
     margin-left: 15px;
 }
 
-.element-policy ul li::before {
+.element-legal-document ul li::before {
     content: "•";
     margin-right: 10px;
 }

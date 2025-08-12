@@ -1,5 +1,6 @@
 {% load static %}
 {% load service_tags %}
+{% load main_tags %}
 
 <!DOCTYPE html>
 <html lang="ua">
@@ -84,10 +85,11 @@
                     <li><a href="{% url "services:index" slug=first_service.slug %}">Наші послуги</a></li>
                 {% endif %}
                 <li><a href="{% url "main:about" %}">Про мене</a></li>
-                <li><a href="#">Зв'язатися зі мною</a></li>
-                <li><a href="/consultation.html">Отримати консультацію</a></li>
+                {% if first_consultation %}
+                <li><a href="{% url "services:consultation" slug=first_consultation.slug %}">Отримати консультацію</a></li>
+                {% endif %}
                 <li><a href="{% url "main:conditioning_policy" %}">Політика кондифіціальності</a></li>
-                <li><a href="#">Публічна офорта</a></li>
+                <li><a href="{% url "main:public_offer" %}">Публічна офорта</a></li>
             </ul>
             <div class="container-logo">
                 <h1 class="logo">Ольга Бардадим</h1>
@@ -98,12 +100,20 @@
                 </div>
                 <p>@OlgaBardadym</p>
             </div>
+            {% get_social_media as social_media %}
+            {% if social_media %}
             <ul class="list-meta-platforms">
-                <li><a href="#"><img src="{% static "deps/svg/facebook.svg" %}" alt=""></a></li>
-                <li><a href="#"><img src="{% static "deps/svg/instagram.svg" %}" alt=""></a></li>
-                <li><a href="#"><img src="{% static "deps/svg/tiktok.svg" %}" alt=""></a></li>
-                <li><a href="#"><img src="{% static "deps/svg/telegram.svg" %}" alt=""></a></li>
+                {% if social_media.facebook %}
+                <li><a href="{{ social_media.facebook }}"><img src="{% static "deps/svg/facebook.svg" %}" alt=""></a></li>
+                {% endif %}
+                {% if social_media.instagram %}
+                <li><a href="{{ social_media.instagram }}"><img src="{% static "deps/svg/instagram.svg" %}" alt=""></a></li>
+                {% endif %}
+                {% if social_media.tiktok %}
+                <li><a href="{{ social_media.tiktok }}"><img src="{% static "deps/svg/tiktok.svg" %}" alt=""></a></li>
+                {% endif %}
             </ul>
+            {% endif %}
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
