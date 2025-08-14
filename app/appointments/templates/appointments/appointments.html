@@ -12,7 +12,6 @@
 {% block content %}
     <section class="registration">
         <div class="container-about-service-or-consultation">
-            <button class="go-back" type="button">Назад</button>
             {% if service.service_type == 'service' %}
                 <h2 class="title-service-or-consultation">Ви обрали послугу: {{ service.title }}</h2>
             {% elif service.service_type == 'consultation' %}

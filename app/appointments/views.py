@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from services.models import Service
-from appointments.models import AppointmentDate, AppointmentTime, Appointment
+from appointments.models import AppointmentDate, AppointmentTime, Appointment, NeedCallBack
 
 from datetime import datetime
 
@@ -11,7 +11,7 @@ import json
 def appointments(request, slug):
     service = get_object_or_404(Service, slug=slug)
 
-    available_dates = AppointmentDate.objects.filter(appointment_times__status=AppointmentTime.NOT_RESERVED).distinct()
+    available_dates = AppointmentDate.objects.filter(status_date=AppointmentDate.OPEN_ACCESS).distinct()
 
     available_times = {}
     for date in available_dates:
@@ -37,7 +37,7 @@ def appointments(request, slug):
             Appointment.objects.create(
                 name=name,
                 surname=surname,
-                phone=phone,
+                phone= '+380' + phone,
                 email=email,
                 comment=comment,
                 order_service = service,
@@ -57,3 +57,11 @@ def appointments(request, slug):
     }
 
     return render(request, 'appointments/appointments.html', context)
+
+def need_call_back(request):
+    if request.method == 'POST':
+        phone = request.POST.get('phone')
+        if phone:
+            NeedCallBack.objects.create(phone= '+380'+phone)
+    referer = request.META.get('HTTP_REFERER', 'index')
+    return redirect(referer)

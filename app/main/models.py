@@ -26,18 +26,6 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Відгук від {self.name} з оцінкою {self.stars}"
-    
-class NeedCallBack(models.Model):
-    phone = models.CharField("Телефон", max_length=20, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=("Дата створення"))
-
-    class Meta:
-        db_table = ("need_call_back")
-        verbose_name = ("Потрібен дзвінок")
-        verbose_name_plural = ("Потрібні дзвінки")
-
-    def __str__(self):
-        return f"Потрібно подзвонити на номер {self.phone}. Даний запит був створен: {self.created_at.strftime('%Y-%m-%d %H:%M:%S')}"
 
 class LegalDocument(models.Model):
     DOCUMENT_TYPE_CHOICES = (

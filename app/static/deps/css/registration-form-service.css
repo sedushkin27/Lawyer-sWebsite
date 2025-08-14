@@ -188,20 +188,20 @@
 }
 
 .time-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     justify-content: center;
 }
 
 .time-button {
-    padding: 22px 10px;
+    padding: 16px 5px;
     background: #242AA9;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .time-button:hover {
@@ -269,6 +269,13 @@
     background: #272eb7;
 }
 
+@media screen and (max-width: 1200px) {
+     .table-input {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 @media screen and (max-width: 1000px) {
     .days-of-week {
         gap: 20px;
@@ -286,10 +293,15 @@
         font-size: 16px;
     }
 
-    .time-button {
+    .time-container {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+    } 
+
+    /* .time-button {
         padding: 10px 20px;
         font-size: 16px;
-    }
+    } */
 }
 
 @media screen and (max-width: 950px) {
@@ -309,10 +321,5 @@
 
     .container-registration-form {
         padding: 20px 0 20px 0;
-    }
-
-    .table-input {
-        display: flex;
-        flex-direction: column;
     }
 }

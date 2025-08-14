@@ -13,7 +13,22 @@ phone_validator = RegexValidator(
 )
 
 class AppointmentDate(models.Model):
+    OVERDUE = "OVERDUE"
+    OPEN_ACCESS = "OPEN_ACCESS"
+    CLOSED_ACCESS = "CLOSED_ACCESS"
+    STATUS_CHOICES = [
+        (OVERDUE, "Прострочено"),
+        (OPEN_ACCESS, "Відкритий"),
+        (CLOSED_ACCESS, "Закритий"),
+    ]
+
     date = models.DateField(("Дата"), auto_now=False, auto_now_add=False)
+    status_date = models.CharField(
+        max_length=13,
+        choices=STATUS_CHOICES,
+        default=OPEN_ACCESS,
+        verbose_name=("Статус дати")
+    )
 
     class Meta:
         db_table = "appointment_date"
@@ -21,7 +36,7 @@ class AppointmentDate(models.Model):
         verbose_name_plural = ("Дати прийому")
 
     def __str__(self):
-        return str(self.date)
+        return f"{str(self.date)} {self.get_status_date_display()}"
     
 class AppointmentTime(models.Model):
     RESERVED = "RESERVED"
@@ -50,7 +65,7 @@ class AppointmentTime(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.date} {str(self.time)}: {self.get_status_display()}"
+        return f"Дата: {self.date.date}, час: {str(self.time)}, статус: {self.get_status_display()}"
 
 class Appointment(models.Model):
 
@@ -70,6 +85,18 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.surname} - {self.phone}, зарезервований час: {self.reserved_time.time} {self.reserved_time.date.date}"
+    
+class NeedCallBack(models.Model):
+    phone = models.CharField("Телефон", max_length=20, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=("Дата створення"))
+
+    class Meta:
+        db_table = ("need_call_back")
+        verbose_name = ("Потрібен дзвінок")
+        verbose_name_plural = ("Потрібні дзвінки")
+
+    def __str__(self):
+        return f"Потрібно подзвонити на номер {self.phone}. Даний запит був створен: {self.created_at.strftime('%Y-%m-%d %H:%M:%S')}"
     
 @receiver(post_save, sender=Appointment)
 def set_reserved_status_on_save(sender, instance, created, **kwargs):

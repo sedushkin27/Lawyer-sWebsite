@@ -117,7 +117,7 @@ function initCallUsForm() {
   const closeButton = document.querySelector('.close-form');
   const menuHamburger = document.querySelector('.menu-hamburger');
   const dropMenu = document.querySelector('.drop-menu');
-  const telInput = document.querySelector('#users-tel');
+  const telInput = document.querySelector('#phone');
   const form = document.querySelector('.form-call-us');
 
   if (!callUsButtons.length || !formContainer) return;
@@ -211,8 +211,11 @@ function initCallUsForm() {
         alert('Будь ласка, введіть коректний номер телефону (9 цифр після +380).');
         return;
       }
+      telInput.value = telInput.value.replace(/\D/g, '');
+      telInput.classList.remove('invalid');
 
-      // form.submit();
+      form.submit();
+      closeForm();
     });
   }
 }

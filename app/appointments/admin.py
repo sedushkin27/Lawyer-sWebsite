@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 from datetime import datetime, timedelta, date
-from appointments.models import AppointmentDate, AppointmentTime, Appointment
+from appointments.models import AppointmentDate, AppointmentTime, Appointment, NeedCallBack
 
 class AppointmentDateForm(forms.ModelForm):
     MODE_CHOICES = (
@@ -178,7 +178,9 @@ class AppointmentDateForm(forms.ModelForm):
             dates = [start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)]
 
         for current_date in dates:
-            if (str(current_date.weekday()) in weekend_days or 
+            print(current_date.weekday())
+            print(weekend_days)
+            if int(current_date.weekday() in weekend_days or 
                 current_date in weekend_dates or 
                 AppointmentDate.objects.filter(date=current_date).exists()):
                 continue
@@ -214,12 +216,33 @@ class AppointmentTimeInline(admin.TabularInline):
     extra = 0
     fields = ['time', 'status']
 
+@admin.action(description="Позначте вибрані дати як відкриті для запису")
+def mark_as_open_access(modeladmin, request, queryset):
+    queryset.update(status_date=AppointmentDate.OPEN_ACCESS)
+
+@admin.action(description="Позначте вибрані дати як закриті для запису")
+def mark_as_closed_access(modeladmin, request, queryset):
+    queryset.update(status_date=AppointmentDate.CLOSED_ACCESS)
+
+
+@admin.action(description="Видалити час прийому (не зарезервований)")
+def delete_unreserved_times(modeladmin, request, queryset):
+    for appointment_date in queryset:
+        AppointmentTime.objects.filter(date=appointment_date, status=AppointmentTime.NOT_RESERVED).delete()
+        if not appointment_date.appointment_times.exists():
+            appointment_date.delete()
+            modeladmin.message_user(request, f'Видалено дату: {appointment_date.date}')
+        else:
+            appointment_date.update(status_date=AppointmentDate.OVERDUE)
+            modeladmin.message_user(request, f'Дата {appointment_date.date} не видалена, оскільки є зарезервовані часові інтервали.', level='warning')
+
 @admin.register(AppointmentDate)
 class AppointmentDateAdmin(admin.ModelAdmin):
-    list_display = ['date', 'available_times_count']
-    list_filter = ['date']
+    list_display = ['date', 'available_times_count', 'status_date']
+    list_filter = ['date', 'status_date']
     search_fields = ['date']
     date_hierarchy = 'date'
+    actions = [mark_as_open_access, mark_as_closed_access, delete_unreserved_times]
 
     def get_form(self, request, obj=None, **kwargs):
         if obj is None:  
@@ -277,3 +300,12 @@ class AppointmentAdmin(admin.ModelAdmin):
             appointment__isnull=True
         )
         return form
+    
+@admin.register(NeedCallBack)
+class NeedCallBackAdmin(admin.ModelAdmin):
+    list_display = ['phone', 'created_at']
+    search_fields = ['phone']
+    ordering = ['-created_at']
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).order_by('-created_at')
