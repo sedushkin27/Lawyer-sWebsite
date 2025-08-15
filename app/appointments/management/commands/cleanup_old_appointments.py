@@ -21,5 +21,15 @@ class Command(BaseCommand):
                 appointment_date.status_date = AppointmentDate.OVERDUE
                 appointment_date.save()
                 self.stdout.write(self.style.WARNING(f'Дата {appointment_date.date} не видалена, оскільки є зарезервовані часові інтервали. Статус змінено на "Прострочено".'))
+
+        now_dates = AppointmentDate.objects.filter(date=today).first()
+        AppointmentTime.objects.filter(date=now_dates, status=AppointmentTime.NOT_RESERVED).delete()
+        if not now_dates.appointment_times.exists():
+            now_dates.delete()
+            self.stdout.write(self.style.SUCCESS(f'Видалено дату: {now_dates.date}'))
+        else:
+            now_dates.status_date=AppointmentDate.CLOSED_ACCESS
+            appointment_date.save()
+            self.stdout.write(self.style.SUCCESS(f'Дата {now_dates.date} оновлена до статусу "Закритий".'))
             
         self.stdout.write(self.style.SUCCESS('Очищення старих прийомів завершено.'))

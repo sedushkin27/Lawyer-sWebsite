@@ -23,7 +23,7 @@
                     {% else %}
                         <img class="service-image" src="{% static "deps/image/alt.png" %}" alt="Зображення не знайдено">
                     {% endif %}
-                    <button type="button" class="opening-list-services">{{ service.title }}</button>
+                    <button type="button" class="opening-list-services" id="opening-list-services">{{ service.title }}</button>
                     <ul class="list-services">
                         {% for anouther_service in another_services %}
                             <li class="service"><a href="{% url "services:index" slug=anouther_service.slug %}">{{ anouther_service.title }}</a></li>
@@ -64,5 +64,5 @@
 {% endblock content %}
 
 {% block js %}
-
+    <script src="{% static "deps/js/services.js" %}"></script>
 {% endblock js %}

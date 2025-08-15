@@ -74,7 +74,8 @@
 
 .opening-list-services::after{
     content: "▽";
-    font-size: 16px;    
+    font-size: 16px;
+    transition: all 0.2s ease-in-out;
 }
 
 .opening-list-services.active::after {
@@ -241,6 +242,11 @@
         box-shadow: none;
         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     }
+
+    .service:hover {
+        transform: scale(1);
+        filter: brightness(1);
+    }
     
     .list-that-you-get {
         grid-template-columns: repeat(1, 1fr);
@@ -258,5 +264,11 @@
     .button-sing-up-for-consultation {
         width: 100%;
         padding: 15px 0;
+    }
+
+    .title-and-price {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
     }
 }
