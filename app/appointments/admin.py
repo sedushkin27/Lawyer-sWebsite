@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django import forms
+from django.urls import reverse
+from django.utils.html import format_html
 from datetime import datetime, timedelta, date
 from appointments.models import AppointmentDate, AppointmentTime, Appointment, NeedCallBack
 
@@ -155,7 +157,6 @@ class AppointmentDateForm(forms.ModelForm):
         interval_minutes = self.cleaned_data['interval_minutes']
         breaks = self.cleaned_data['breaks']
 
-        # Парсим выходные даты
         weekend_dates = set()
         if specific_weekend_days:
             weekend_dates = {datetime.strptime(d.strip(), '%Y-%m-%d').date() for d in specific_weekend_days.split(',') if d.strip()}
@@ -214,7 +215,15 @@ class AppointmentDateForm(forms.ModelForm):
 class AppointmentTimeInline(admin.TabularInline):
     model = AppointmentTime
     extra = 0
-    fields = ['time', 'status']
+    fields = ['time', 'status', 'appointment_link']
+    readonly_fields = ['appointment_link']
+
+    @admin.display(description='Клієнт')
+    def appointment_link(self, obj):
+        if hasattr(obj, 'appointment') and obj.appointment:
+            url = reverse('admin:appointments_appointment_change', args=[obj.appointment.id])
+            return format_html('<a href="{}">{}</a>', url, f"{obj.appointment.name} {obj.appointment.surname}")
+        return '-'
 
 @admin.action(description="Позначте вибрані дати як відкриті для запису")
 def mark_as_open_access(modeladmin, request, queryset):
@@ -224,7 +233,6 @@ def mark_as_open_access(modeladmin, request, queryset):
 def mark_as_closed_access(modeladmin, request, queryset):
     queryset.update(status_date=AppointmentDate.CLOSED_ACCESS)
 
-
 @admin.action(description="Видалити час прийому (не зарезервований)")
 def delete_unreserved_times(modeladmin, request, queryset):
     for appointment_date in queryset:
@@ -233,7 +241,8 @@ def delete_unreserved_times(modeladmin, request, queryset):
             appointment_date.delete()
             modeladmin.message_user(request, f'Видалено дату: {appointment_date.date}')
         else:
-            appointment_date.update(status_date=AppointmentDate.OVERDUE)
+            appointment_date.status_date = AppointmentDate.CLOSED_ACCESS
+            appointment_date.save()
             modeladmin.message_user(request, f'Дата {appointment_date.date} не видалена, оскільки є зарезервовані часові інтервали.', level='warning')
 
 @admin.register(AppointmentDate)

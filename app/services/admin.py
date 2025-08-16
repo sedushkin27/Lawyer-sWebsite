@@ -2,12 +2,12 @@ from django.contrib import admin
 from django.utils.text import slugify
 from django import forms
 
-# Register your models here.
 from services.models import Service, ServiceSection, SectionItem
 
 # admin.site.register(Services)
 admin.site.register(ServiceSection)
 admin.site.register(SectionItem)
+
 class ServiceSectionForm(forms.ModelForm):
     items_text = forms.CharField(
         label="Елементи списку (по одному на рядок)",
@@ -19,12 +19,16 @@ class ServiceSectionForm(forms.ModelForm):
         model = ServiceSection
         fields = ['title', 'items_text']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            items = self.instance.items.all()
+            self.initial['items_text'] = '\n'.join(item.text for item in items)
+
     def save(self, *args, **kwargs):
         instance = super().save(*args, **kwargs)
         if self.cleaned_data['items_text']:
-            # Удаляем существующие элементы перед добавлением новых
             instance.items.all().delete()
-            # Создаем новые элементы на основе текста
             items = [item.strip() for item in self.cleaned_data['items_text'].split('\n') if item.strip()]
             for item_text in items:
                 SectionItem.objects.create(section=instance, text=item_text)
@@ -32,13 +36,13 @@ class ServiceSectionForm(forms.ModelForm):
 
 class SectionItemInline(admin.TabularInline):
     model = SectionItem
-    extra = 0  # Не добавляем пустые формы, так как они создаются динамически
+    extra = 0 
     fields = ['text']
     can_delete = True
 
 class ServiceSectionInline(admin.TabularInline):
     model = ServiceSection
-    extra = 1  # Количество пустых форм для добавления новых секций
+    extra = 0 
     form = ServiceSectionForm
     fields = ['title', 'items_text']
 
