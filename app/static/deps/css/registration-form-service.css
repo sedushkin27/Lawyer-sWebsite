@@ -73,13 +73,21 @@
     opacity: 0;
 }
 
-.error-message {
+.message {
     display: flex;
     padding: 10px;
     flex-direction: column;
-    border: 2px solid #f00;
     border-radius: 10px;
     background: rgba(255, 0, 0, 0.06);
+}
+.message.error {
+    border: 2px solid red;
+}
+.message.success {
+    border: 2px solid green;
+}
+.message.not-valid {
+    border: 2px solid yellow;
 }
 
 .registration-form {

@@ -175,9 +175,9 @@ function characterCounter() {
 
 function validateForm() {
   const form = document.querySelector('.registration-form');
-  const errorContainer = document.querySelector('.container-error');
-  const errorTitle = errorContainer.querySelector('.error-message h4');
-  const errorText = errorContainer.querySelector('.error-message p');
+  const errorContainer = document.getElementById('container_not_valid');
+  const errorTitle = errorContainer.querySelector('#container_not_valid .message h4');
+  const errorText = errorContainer.querySelector('#container_not_valid .message p');
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -210,6 +210,7 @@ function validateForm() {
   function showError(title, text) {
     errorTitle.textContent = title;
     errorText.textContent = text;
+    console.log('Error:', title, text);
     errorContainer.classList.remove('hidden');
   }
 }

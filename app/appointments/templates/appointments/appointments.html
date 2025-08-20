@@ -22,8 +22,17 @@
         </div>
         <div class="container-registration-form">
             <form class="registration-form" method="POST" action="{% url 'appointments:index' service.slug %}">
-                <div class="container-error hidden">
-                    <div class="error-message">
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="container-error">
+                        <div class="message {% if message.tags == 'success' %}success{% else %}error{% endif %} show">
+                            {{ message }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                <div id="container_not_valid" class="container-error hidden">
+                    <div class="message not-valid">
                         <h4>Name error</h4>
                         <p>About error</p>
                     </div>

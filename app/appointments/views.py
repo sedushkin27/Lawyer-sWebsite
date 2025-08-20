@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 
 from services.models import Service
 from appointments.models import AppointmentDate, AppointmentTime, Appointment, NeedCallBack
@@ -43,6 +44,7 @@ def appointments(request, slug):
                 order_service = service,
                 reserved_time=appointment_time
             )
+            messages.success(request, 'Ваша заявка на прийом успішно створена!')
             return redirect('appointments:index', slug=slug)
         
         except ValueError:
